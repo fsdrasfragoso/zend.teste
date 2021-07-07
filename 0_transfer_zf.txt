@@ -1,0 +1,261 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : LOCAL
+Source Server Version : 50724
+Source Host           : localhost:3306
+Source Database       : 0_transfer_zf
+
+Target Server Type    : MYSQL
+Target Server Version : 50724
+File Encoding         : 65001
+
+Date: 2021-07-07 05:50:20
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for log_usuarios
+-- ----------------------------
+DROP TABLE IF EXISTS `log_usuarios`;
+CREATE TABLE `log_usuarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `nome` varchar(45) NOT NULL,
+  `sobrenome` varchar(200) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `imagem` text,
+  `rua` varchar(200) DEFAULT NULL,
+  `bairro` varchar(200) DEFAULT NULL,
+  `numero` int(5) DEFAULT NULL,
+  `complemento` varchar(100) NOT NULL,
+  `cidade` varchar(100) NOT NULL,
+  `estado` varchar(100) NOT NULL,
+  `observacoes` text,
+  `status` tinyint(4) DEFAULT '0',
+  `log_action` enum('INSERT','UPDATE','DELETE') DEFAULT NULL,
+  `dt_modificacao` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of log_usuarios
+-- ----------------------------
+INSERT INTO `log_usuarios` VALUES ('1', '1', 'Esdras', 'Fragoso', 'esdrasfragoso@beira.com.br', 'esdras', 'Rua Paulo ', 'Vila Siqueira', '199', 'AP 21 ', 'São Paulo', 'São Paulo', null, '1', 'INSERT', '2021-07-06 23:52:29');
+INSERT INTO `log_usuarios` VALUES ('2', '2', 'Joice ', 'Fragoso', 'joice.fragoso@live.com', 'imagem', 'Antonio Domingues', 'Vila Azul', '10', 'Ponte', 'Boa Viagem', 'Ceara', 'Teste ', '0', 'INSERT', '2021-07-06 23:59:19');
+INSERT INTO `log_usuarios` VALUES ('3', '3', 'Joeliton', 'Fragoso', 'jojo.fragoso@live.com', 'imagem', 'Antonio Domingues', 'Vila Azul', '10', 'Ponte', 'Boa Viagem', 'Ceara', 'Teste ', '0', 'INSERT', '2021-07-07 00:02:25');
+INSERT INTO `log_usuarios` VALUES ('4', '4', 'Joaby', 'Fragoso', 'jjuju.fragoso@live.com', 'imagem', 'Antonio Domingues', 'Vila Azul', '10', 'Ponte', 'Boa Viagem', 'Ceara', 'Teste ', '0', 'INSERT', '2021-07-07 00:03:42');
+INSERT INTO `log_usuarios` VALUES ('5', '1', 'Esdras', 'Fragoso', 'esdrasfragoso@beira.com.br', 'esdras', 'Rua Paulo ', 'Vila Siqueira', '199', 'AP 21 ', 'São Paulo', 'São Paulo', '  ', '1', 'UPDATE', '2021-07-07 00:24:38');
+INSERT INTO `log_usuarios` VALUES ('6', '1', 'Esdras', 'Fragoso', 'esdrasfragoso@beira.com.br', 'esdras', 'Rua Paulo ', 'Vila Siqueira', '199', 'AP 21 ', 'São Paulo', 'São Paulo', '    tetetete', '1', 'UPDATE', '2021-07-07 00:24:49');
+INSERT INTO `log_usuarios` VALUES ('7', '1', 'Esdras', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'esdras', 'Rua Paulo ', 'Vila Siqueira', '199', 'AP 21 ', 'São Paulo', 'São Paulo', '     tetetete ', '1', 'UPDATE', '2021-07-07 00:34:15');
+INSERT INTO `log_usuarios` VALUES ('8', '1', 'Esdras', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'esdras', 'Rua Paulo ', 'Vila Siqueira', '199', 'AP 21 ', 'São Paulo', 'São Paulo', '     tetetete ', '1', 'DELETE', '2021-07-07 01:58:25');
+INSERT INTO `log_usuarios` VALUES ('9', '5', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'imagem', 'Antonio Domingues', 'Vila Azul', '12', 'Ponte', 'Boa Viagem', 'Ceara', ' sasfasfasfffffafaarfafa', '1', 'INSERT', '2021-07-07 01:58:59');
+INSERT INTO `log_usuarios` VALUES ('10', '5', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'imagem', 'Antonio Domingues', 'Vila Azul', '12', 'Ponte', 'Boa Viagem', 'Ceara', '  sasfasfasfffffafaarfafa 5858', '1', 'UPDATE', '2021-07-07 02:21:21');
+INSERT INTO `log_usuarios` VALUES ('11', '5', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'imagem', 'Antonio Domingues', 'Vila Azul', '128', 'Ponte', 'Boa Viagem', 'Ceara', '   sasfasfasfffffafaarfafa 5858 ', '1', 'UPDATE', '2021-07-07 02:21:36');
+INSERT INTO `log_usuarios` VALUES ('12', '4', 'Joaby', 'Fragoso', 'joabu.fragoso@live.com', 'imagem', 'Antonio Domingues', 'Vila Azul', '10', 'Ponte', 'Boa Viagem', 'Ceara', ' Teste  ', '1', 'UPDATE', '2021-07-07 02:23:28');
+INSERT INTO `log_usuarios` VALUES ('13', '6', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '10', '10', 'Boa Viagem', 'Ceara', ' 1010101', '1', 'INSERT', '2021-07-07 02:53:18');
+INSERT INTO `log_usuarios` VALUES ('14', '7', 'esdras.neto@ativo.com', 'Fragoso', 'esdrasfragoso@gmail.com', '', 'Antonio Domingues', 'Vila Azul', '10', 'Ponte', 'Boa Viagem', 'Ceara', ' 10103681', '1', 'INSERT', '2021-07-07 02:54:52');
+INSERT INTO `log_usuarios` VALUES ('15', '8', '1\'', 'Fragoso da Silva Neto', '12', '', 'Antonio Domingues', 'Vila Azul', '12', '12', 'Boa Viagem', 'Ceara', ' 12', '1', 'INSERT', '2021-07-07 02:55:54');
+INSERT INTO `log_usuarios` VALUES ('16', '9', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '12342134', '12', 'Boa Viagem', 'Ceara', ' 4214141', '1', 'INSERT', '2021-07-07 03:44:43');
+INSERT INTO `log_usuarios` VALUES ('17', '10', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '12342134', '12', 'Boa Viagem', 'Ceara', ' 4214141', '1', 'INSERT', '2021-07-07 03:45:01');
+INSERT INTO `log_usuarios` VALUES ('18', '11', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '12342134', '12', 'Boa Viagem', 'Ceara', ' 4214141', '1', 'INSERT', '2021-07-07 03:45:01');
+INSERT INTO `log_usuarios` VALUES ('19', '12', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1', 'INSERT', '2021-07-07 04:33:25');
+INSERT INTO `log_usuarios` VALUES ('20', '13', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1', 'INSERT', '2021-07-07 04:34:46');
+INSERT INTO `log_usuarios` VALUES ('21', '14', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1', 'INSERT', '2021-07-07 04:36:00');
+INSERT INTO `log_usuarios` VALUES ('22', '15', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1', 'INSERT', '2021-07-07 04:36:58');
+INSERT INTO `log_usuarios` VALUES ('23', '16', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'fotos/358bb79d887a8a0512e59b5f6f8f6693.jpeg', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1', 'INSERT', '2021-07-07 04:37:45');
+INSERT INTO `log_usuarios` VALUES ('24', '17', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '0dc98813ae6568faf223fa3996e0e61a.jpeg', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1', 'INSERT', '2021-07-07 04:39:02');
+INSERT INTO `log_usuarios` VALUES ('25', '18', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'usuariosd7c46fcc5f3389b838e309ea66f2d81a.jpeg', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1', 'INSERT', '2021-07-07 04:40:51');
+INSERT INTO `log_usuarios` VALUES ('26', '19', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'usuarios/a8a8839f19cc0c558283d887f246ffb0.jpeg', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1', 'INSERT', '2021-07-07 04:41:16');
+INSERT INTO `log_usuarios` VALUES ('27', '20', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '5dd9a8419da67e349007b1c6add88f5e.jpeg', 'Antonio Domingues', 'Vila Azul', '223', '23', 'Boa Viagem', 'Ceara', ' 323232', '1', 'INSERT', '2021-07-07 05:11:38');
+INSERT INTO `log_usuarios` VALUES ('28', '21', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'img/c68f5eb6711e767ed06425c4947b39b0.jpeg', 'Antonio Domingues', 'Vila Azul', '223', '23', 'Boa Viagem', 'Ceara', ' 323232', '1', 'INSERT', '2021-07-07 05:12:09');
+INSERT INTO `log_usuarios` VALUES ('29', '18', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'usuariosd7c46fcc5f3389b838e309ea66f2d81a.jpeg', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1', 'DELETE', '2021-07-07 05:12:57');
+INSERT INTO `log_usuarios` VALUES ('30', '16', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'fotos/358bb79d887a8a0512e59b5f6f8f6693.jpeg', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1', 'DELETE', '2021-07-07 05:13:02');
+INSERT INTO `log_usuarios` VALUES ('31', '13', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1', 'DELETE', '2021-07-07 05:13:05');
+
+-- ----------------------------
+-- Table structure for usuarios
+-- ----------------------------
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `sobrenome` varchar(200) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `imagem` text,
+  `rua` varchar(200) DEFAULT NULL,
+  `bairro` varchar(200) DEFAULT NULL,
+  `numero` int(5) DEFAULT NULL,
+  `complemento` varchar(100) NOT NULL,
+  `cidade` varchar(100) NOT NULL,
+  `estado` varchar(100) NOT NULL,
+  `observacoes` text,
+  `status` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of usuarios
+-- ----------------------------
+INSERT INTO `usuarios` VALUES ('2', 'Joice ', 'Fragoso', 'joice.fragoso@live.com', 'imagem', 'Antonio Domingues', 'Vila Azul', '10', 'Ponte', 'Boa Viagem', 'Ceara', 'Teste ', '0');
+INSERT INTO `usuarios` VALUES ('3', 'Joeliton', 'Fragoso', 'jojo.fragoso@live.com', 'imagem', 'Antonio Domingues', 'Vila Azul', '10', 'Ponte', 'Boa Viagem', 'Ceara', 'Teste ', '0');
+INSERT INTO `usuarios` VALUES ('4', 'Joaby', 'Fragoso', 'joabu.fragoso@live.com', 'imagem', 'Antonio Domingues', 'Vila Azul', '10', 'Ponte', 'Boa Viagem', 'Ceara', ' Teste  ', '1');
+INSERT INTO `usuarios` VALUES ('5', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'imagem', 'Antonio Domingues', 'Vila Azul', '128', 'Ponte', 'Boa Viagem', 'Ceara', '   sasfasfasfffffafaarfafa 5858 ', '1');
+INSERT INTO `usuarios` VALUES ('6', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '10', '10', 'Boa Viagem', 'Ceara', ' 1010101', '1');
+INSERT INTO `usuarios` VALUES ('7', 'esdras.neto@ativo.com', 'Fragoso', 'esdrasfragoso@gmail.com', '', 'Antonio Domingues', 'Vila Azul', '10', 'Ponte', 'Boa Viagem', 'Ceara', ' 10103681', '1');
+INSERT INTO `usuarios` VALUES ('8', '1\'', 'Fragoso da Silva Neto', '12', '', 'Antonio Domingues', 'Vila Azul', '12', '12', 'Boa Viagem', 'Ceara', ' 12', '1');
+INSERT INTO `usuarios` VALUES ('9', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '12342134', '12', 'Boa Viagem', 'Ceara', ' 4214141', '1');
+INSERT INTO `usuarios` VALUES ('10', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '12342134', '12', 'Boa Viagem', 'Ceara', ' 4214141', '1');
+INSERT INTO `usuarios` VALUES ('11', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '12342134', '12', 'Boa Viagem', 'Ceara', ' 4214141', '1');
+INSERT INTO `usuarios` VALUES ('12', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1');
+INSERT INTO `usuarios` VALUES ('14', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1');
+INSERT INTO `usuarios` VALUES ('15', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1');
+INSERT INTO `usuarios` VALUES ('17', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '0dc98813ae6568faf223fa3996e0e61a.jpeg', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1');
+INSERT INTO `usuarios` VALUES ('19', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'usuarios/a8a8839f19cc0c558283d887f246ffb0.jpeg', 'Antonio Domingues', 'Vila Azul', '124', '213', 'Boa Viagem', 'Ceara', ' 1231', '1');
+INSERT INTO `usuarios` VALUES ('20', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', '5dd9a8419da67e349007b1c6add88f5e.jpeg', 'Antonio Domingues', 'Vila Azul', '223', '23', 'Boa Viagem', 'Ceara', ' 323232', '1');
+INSERT INTO `usuarios` VALUES ('21', 'esdras.neto@ativo.com', 'Fragoso da Silva Neto', 'esdrasfragoso@beira.com.br', 'img/c68f5eb6711e767ed06425c4947b39b0.jpeg', 'Antonio Domingues', 'Vila Azul', '223', '23', 'Boa Viagem', 'Ceara', ' 323232', '1');
+DROP TRIGGER IF EXISTS `log_usuario_insert`;
+DELIMITER ;;
+CREATE TRIGGER `log_usuario_insert` AFTER INSERT ON `usuarios` FOR EACH ROW BEGIN
+	#BY Esdras Fragoso
+	-- application: Calulo do Prime
+	-- author: Esdras Fragoso
+	-- created:
+	-- last INSERT:
+	INSERT INTO `0_transfer_zf`.`log_usuarios` (		
+		`id_usuario`,
+		`nome`,
+		`sobrenome`,
+		`email`,
+		`imagem`,
+		`rua`,
+		`bairro`,
+		`numero`,
+		`complemento`,
+		`cidade`,
+		`estado`,
+		`observacoes`,
+		`status`,
+		`log_action`,
+		`dt_modificacao`
+	)
+VALUES
+	(		
+		NEW.id,
+		NEW.nome,
+		NEW.sobrenome,
+		NEW.email,
+		NEW.imagem,
+		NEW.rua,
+		NEW.bairro,
+		NEW.numero,
+		NEW.complemento,
+		NEW.cidade,
+		NEW.estado,
+		NEW.observacoes,
+		NEW.`status`,
+		'INSERT',
+		NOW()
+	);
+
+
+END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `log_usuario_update`;
+DELIMITER ;;
+CREATE TRIGGER `log_usuario_update` AFTER UPDATE ON `usuarios` FOR EACH ROW BEGIN
+	#BY Esdras Fragoso
+	-- application: Calulo do Prime
+	-- author: Esdras Fragoso
+	-- created:
+	-- last INSERT:
+	INSERT INTO `0_transfer_zf`.`log_usuarios` (		
+		`id_usuario`,
+		`nome`,
+		`sobrenome`,
+		`email`,
+		`imagem`,
+		`rua`,
+		`bairro`,
+		`numero`,
+		`complemento`,
+		`cidade`,
+		`estado`,
+		`observacoes`,
+		`status`,
+		`log_action`,
+		`dt_modificacao`
+	)
+VALUES
+	(		
+		NEW.id,
+		NEW.nome,
+		NEW.sobrenome,
+		NEW.email,
+		NEW.imagem,
+		NEW.rua,
+		NEW.bairro,
+		NEW.numero,
+		NEW.complemento,
+		NEW.cidade,
+		NEW.estado,
+		NEW.observacoes,
+		NEW.`status`,
+		'UPDATE',
+		NOW()
+	);
+
+
+END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `log_usuario_delete`;
+DELIMITER ;;
+CREATE TRIGGER `log_usuario_delete` AFTER DELETE ON `usuarios` FOR EACH ROW BEGIN
+	#BY Esdras Fragoso
+	-- application: Calulo do Prime
+	-- author: Esdras Fragoso
+	-- created:
+	-- last INSERT:
+	INSERT INTO `0_transfer_zf`.`log_usuarios` (		
+		`id_usuario`,
+		`nome`,
+		`sobrenome`,
+		`email`,
+		`imagem`,
+		`rua`,
+		`bairro`,
+		`numero`,
+		`complemento`,
+		`cidade`,
+		`estado`,
+		`observacoes`,
+		`status`,
+		`log_action`,
+		`dt_modificacao`
+	)
+VALUES
+	(		
+		OLD.id,
+		OLD.nome,
+		OLD.sobrenome,
+		OLD.email,
+		OLD.imagem,
+		OLD.rua,
+		OLD.bairro,
+		OLD.numero,
+		OLD.complemento,
+		OLD.cidade,
+		OLD.estado,
+		OLD.observacoes,
+		OLD.`status`,
+		'DELETE',
+		NOW()
+	);
+
+
+END
+;;
+DELIMITER ;
