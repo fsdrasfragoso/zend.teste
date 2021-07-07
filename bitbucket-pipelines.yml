@@ -1,0 +1,59 @@
+image: guidametto/ci_bitbucket_pipeline:copy_paste_aws_codedeploy_v1
+
+pipelines:
+  branches:
+    master:
+      - step:
+          script:
+          - zip -r artifact.zip * .* # creates deployment archive - required per codedeploy
+          - ls -lhtr
+          - DEPLOYMENT_GROUP_NAME=$DEPLOYMENT_GROUP_NAME_STAGING # define which environment should be deployed to
+          - export DEPLOYMENT_GROUP_NAME
+          - pwd
+          - python codedeploy_deploy.py # run the deployment script
+    production:
+      - step:
+          script:
+          - zip -r artifact.zip * .* # creates deployment archive - required per codedeploy
+          - ls -lhtr
+          - DEPLOYMENT_GROUP_NAME=$DEPLOYMENT_GROUP_NAME_PRODUCTION # define which environment should be deployed to
+          - export DEPLOYMENT_GROUP_NAME
+          - pwd
+          - python codedeploy_deploy.py # run the deployment script
+    producao:
+      - step:
+          script:
+          - zip -r artifact.zip * .* # creates deployment archive - required per codedeploy
+          - ls -lhtr
+          - DEPLOYMENT_GROUP_NAME=$DEPLOYMENT_GROUP_NAME_PRODUCAO # define which environment should be deployed to
+          - export DEPLOYMENT_GROUP_NAME
+          - pwd
+          - python codedeploy_deploy.py # run the deployment script
+  custom:
+    master:
+      - step:
+          script:
+          - zip -r artifact.zip * .* # creates deployment archive - required per codedeploy
+          - ls -lhtr
+          - DEPLOYMENT_GROUP_NAME=$DEPLOYMENT_GROUP_NAME_DEVELOPER # define which environment should be deployed to
+          - export DEPLOYMENT_GROUP_NAME
+          - pwd
+          - python codedeploy_deploy.py # run the deployment script
+    production:
+      - step:
+          script:
+          - zip -r artifact.zip * .* # creates deployment archive - required per codedeploy
+          - ls -lhtr
+          - DEPLOYMENT_GROUP_NAME=$DEPLOYMENT_GROUP_NAME_PRODUCTION # define which environment should be deployed to
+          - export DEPLOYMENT_GROUP_NAME
+          - pwd
+          - python codedeploy_deploy.py # run the deployment script
+    producao:
+      - step:
+          script:
+          - zip -r artifact.zip * .* # creates deployment archive - required per codedeploy
+          - ls -lhtr
+          - DEPLOYMENT_GROUP_NAME=$DEPLOYMENT_GROUP_NAME_PRODUCAO # define which environment should be deployed to
+          - export DEPLOYMENT_GROUP_NAME
+          - pwd
+          - python codedeploy_deploy.py # run the deployment script

@@ -1,0 +1,603 @@
+
+       <table width="100%" cellpadding="0" cellspacing="0">
+          <tbody><tr>
+          <td height="30" class="table-interna-top">
+            <div class="titulo-area">
+                Edição da Home O2 por minuto
+              </div>
+
+          </td>
+          </tr>
+          <tr>
+          <td class="degrade-list-left degrade-list-right degrade" height="30">&nbsp;</td>
+          </tr>
+
+          <tr>
+          <td class="degrade-list-left degrade-list-right" height="2600">
+          <link rel="stylesheet" type="text/css" href="<?php echo $this->BaseUrl();?>/css/homesite/style.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $this->BaseUrl();?>/css/homesite/jquery.qtip.css" />
+
+<link rel="stylesheet" type="text/css" href="<?php echo $this->BaseUrl();?>/css/homesite/jquery.fancybox-1.3.4.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $this->BaseUrl();?>/css/homesite/cadastro.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $this->BaseUrl();?>/css/homesite/jquery-ui-1.8.5.custom.css">
+
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->BaseUrl();?>/css/homesite/ie8.css">
+<![endif]-->
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->BaseUrl();?>/css/homesite/ie7.css">
+<![endif]-->
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/modernizr.custom.89607.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/ws.ma.custom.elements.forms.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/jquery.pajinate.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/jquery-ui-1.10.2.custom.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/jquery.validate.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/jquery.maskedinput-1.3.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/jquery.metadata.js"></script>
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/ajaxfileupload.js"></script>
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/jquery.qtip.min.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/init.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/jquery.fancybox-1.3.4.pack.js"></script>
+
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/lofslidernews.js"></script>
+<script type="text/javascript" src="<?php echo $this->BaseUrl();?>/js/homesite/index.js"></script>
+
+    <!--CONTAINER-->
+    <div class="container">
+<?php
+//echo $this->render('homesite/includes/header.phtml');
+?>
+<?php
+$site_webdoor = $this->BaseUrl().'/webdoor/';
+$urlNoticia = $this->BaseUrl().'/upload/noticia/';
+
+?>
+        <!--CONTENT PARA ELEMENTOS FLUTUANTES DE PUBLICIDADE-->
+        <div class="contentPublic">
+
+            <!--AREA OPÇÕES-->
+
+            <!--CONTENT-->
+            <div class="content" id="contente">
+                            <!--tabs-->
+                        <div id="optionsHome">
+
+
+                        <!--BANNER-->
+                        <div class="areaBanner">
+                            <div id="jslidernews1" class="lof-slidecontent">
+                                <div class="preload"><div></div></div>
+                                <div class="main-slider-content">
+                                    <ul class="sliders-wrap-inner">
+                                        <?php
+                                        foreach($this->webdoors as $webdoor):
+                                        ?>
+
+                                        <li>
+                                            <div class="legenda-slide">
+                                                <h2><a href=""><?=$webdoor['nm_webdoor_titulo']?></a></h2>
+                                            </div>
+                                            <a href="">
+                                                <img src="<?php echo $site_webdoor; ?><?php echo  $webdoor['nm_webdoor_foto'];?>" alt="<?=$webdoor['nm_webdoor_titulo']?>" width="373" height="249" />
+                                            </a>
+                                        </li>
+
+                                        <?php
+                                        endforeach;
+                                        ?>
+                                    </ul>
+                                </div>
+
+                                <div class="navigator-content">
+                                  <a class="button-previous1 left"><img src="<?php echo $this->BaseUrl()?>/img/homesite/nav/seta_left_webdoor.png" alt="" /> </a>
+                                  <a class="button-next1 right"><img src="<?php echo $this->BaseUrl()?>/img/homesite/nav/seta_right_webdoor.png" alt="" /></a>
+                                </div>
+                             </div>
+                            <div class="BoxCenter">
+                                <div class="edicao_barra">
+                                    <?=$this->formSelect("id_situacao_cadastro1",$this->posicao[0]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(1);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                                </div>
+                                <?php
+                                        $i=0;
+                                        foreach ($this->dados as $resultado): ?>
+
+                                            <?php
+                                               if($resultado["id_home_site_posicao"] == 1){ ?>
+
+                                                    <article<?php if ($i==0) {echo" class='first-child'";}?>>
+                                                       <h2><a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>"><?=$resultado["nm_item"]?></a></h2>
+                                                       <a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>"><span><?=$resultado["ds_titulo"]?></span></a>
+                                                    <?php
+                                                       if($resultado["nr_ordem"] == 1){ ?>
+                                                            <p><a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>"><?=$resultado["ds_subtitulo"]?></a></p>
+                                                    <?php
+                                                       }
+                                                       ?>
+                                           </article>
+                                            <?php
+                                               }
+                                            $i++;
+                                        endforeach;
+                                ?>
+
+                            </div>
+                <div class="BoxRight">
+                                <div class="edicao_barra">
+                                    <?=$this->formSelect("id_situacao_cadastro2",$this->posicao[1]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(2);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                                </div>
+
+                    <!--Box Publicidade-->
+                    <div class="pub2">
+                        <img src="<?php echo $this->BaseUrl()?>/img/homesite/img-temporary/diadora.jpg" alt="" width="300" height="250" />
+                    </div>
+                    <!--Final Box Publicidade-->
+                </div>
+                                </div>
+
+                                <div class="block100" style="position:relative;">
+                                <div class="column">
+                                    <?php
+                                        switch ($this->posicao[2]['ds_div']) {
+                                            case "bloco1": echo $this->render('homesite/includes/bloco1.phtml');
+                                                break;
+                                            case "bloco2":  echo $this->render('homesite/includes/bloco2.phtml');
+                                                break;
+                                            case "bloco3": echo $this->render('homesite/includes/bloco3.phtml');
+                                                break;
+                                            case "bloco4": echo $this->render('homesite/includes/bloco4.phtml');
+                                                break;
+                                            case "bloco5": echo $this->render('homesite/includes/bloco5.phtml');
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    ?>
+                                </div>
+                                <div class="enquete">
+                                    <div class="edicao_barra">
+                                        <?=$this->formSelect("id_situacao_cadastro4",$this->posicao[3]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(4);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                                    </div>
+                                <h2>enquete</h2>
+                                    <p><?=$this->enquetepergunta?></p>
+
+                                    <form action="#" method="post" id="enquete_form" name="enquete_form">
+                                        <input type="hidden" name="id_enquete" id="id_enquete" value="<?=$this->id_enquetepergunta?>">
+                                            <fieldset>
+                                                <?php
+                                                foreach($this->enquete as $enquete): ?>
+
+                                                    <div class="block100"><input type="radio" value="<?=$enquete["id_pergunta"]?>" class="custom" name="resposta" id="resposta" class="resposta"/> <?=$enquete["ds_pergunta"]?></div>
+
+                                                <?php
+                                                endforeach;
+                                                ?>
+                                            </fieldset>
+
+                                            <fieldset class="mtop1">
+                                                <input type="submit" name="responder" id="responder" value="responder" class="btn_azul"/>
+                                                <input type="button" name="respostas" id="respostas" value="ver respostas" class="btn_azul"/>
+                                            </fieldset>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div id="banner_central">
+                    <div class="edicao_barra">
+                        <?=$this->formSelect("id_situacao_cadastro5",$this->posicao[4]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(5);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                    </div>
+                    <div class="tdcenter">
+                        <img src="<?php echo $this->BaseUrl()?>/img/homesite/img-temporary/puma.jpg" width="729" height="90" alt="Puma" title="Puma" />
+                    </div>
+                </div>
+
+                <div class="contentPublic">
+                        <div class="content" id="contente1">
+
+                                <div class="block100">
+                                    <div class="coluna_left mtop2">
+                                    <div class="column">
+                                    <?php
+                                        switch ($this->posicao[5]['ds_div']) {
+                                            case "bloco1": echo $this->render('homesite/includes/bloco1.phtml');
+                                                break;
+                                            case "bloco2":  echo $this->render('homesite/includes/bloco2.phtml');
+                                                break;
+                                            case "bloco3": echo $this->render('homesite/includes/bloco3.phtml');
+                                                break;
+                                            case "bloco4": echo $this->render('homesite/includes/bloco4.phtml');
+                                                break;
+                                            case "bloco5": echo $this->render('homesite/includes/bloco5.phtml');
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    ?>
+                                    <?php
+                                        switch ($this->posicao[7]['ds_div']) {
+                                            case "bloco1": echo $this->render('homesite/includes/bloco1.phtml');
+                                                break;
+                                            case "bloco2":  echo $this->render('homesite/includes/bloco2.phtml');
+                                                break;
+                                            case "bloco3": echo $this->render('homesite/includes/bloco3.phtml');
+                                                break;
+                                            case "bloco4": echo $this->render('homesite/includes/bloco4.phtml');
+                                                break;
+                                            case "bloco5": echo $this->render('homesite/includes/bloco5.phtml');
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    ?>
+                                    <div class="videos_home block100">
+                                        <div class="edicao_barra">
+                                            <?=$this->formSelect("id_situacao_cadastro9",$this->posicao[8]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(9);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                                        </div>
+                                        <div class="tabsgenericas">
+                                        <ul class="nav block100">
+                                        <li><a href="#videosh">vídeos</a></li>
+                                        <li><a href="#galeriah">galeria de fotos</a></li>
+                                        </ul>
+
+                                                <div id="videosh">
+                                                    <div class="block100">
+                                                        <?php
+                                                            $findYoutube  = '&mediaId=';
+                                                            $findmeUol    = '/embed/';
+                                                            $mystringa = $this->videoDestaque["ds_embed"];
+                                                            $posY = strrchr($mystringa, $findYoutube);
+                                                            $posU = stripos($mystringa, $findmeUol);
+
+                                                            if($posU != ""){ //youtube
+                                                                $xz = explode("/embed/", $mystringa);
+                                                                $imgVideo = "http://img.youtube.com/vi/".$xz[1]."/0.jpg";
+                                                            }else if($posY != ""){ //é uol
+                                                                $xz = explode("&mediaId=", $mystringa);
+                                                                $imgVideo = "http://thumb.mais.uol.com.br/".$xz[1]."-medium.jpg";
+                                                            }
+                                                        ?>
+
+                                                                    <div class="overlay_play">
+                                                                            <img src="<?php echo $this->BaseUrl()?>/img/homesite/ico/play_hover.png" />
+                                                                    </div>
+
+                                                                        <img src="<?=$imgVideo?>" alt="<?=$this->videoDestaque["ds_titulo"]?>" width="647" height="310" />
+
+
+                                                    </div>
+                                                    <div class="coluna_noticias">
+                                                        <?php
+                                                        if(isset($this->galeriaVideo)){
+                                                            foreach ($this->galeriaVideo as $video){
+
+                                                                $findYoutube  = '&mediaId=';
+                                                                $findmeUol    = '/embed/';
+                                                                $mystring = $video["ds_embed"];
+                                                                $posY = strrchr($mystring, $findYoutube);
+                                                                $posU = stripos($mystring, $findmeUol);
+
+                                                                if($posU != ""){ //youtube
+                                                                    $x = explode("/embed/", $mystring);
+                                                                    $imgVideo = "http://img.youtube.com/vi/".$x[1]."/0.jpg";
+                                                                }else if($posY != ""){ //é uol
+                                                                    $x = explode("&mediaId=", $mystring);
+                                                                    $imgVideo = "http://thumb.mais.uol.com.br/".$x[1]."-medium.jpg";
+                                                                }
+                                                                ?>
+
+                                                                <article>
+                                                                    <h2><a href="<?=$this->BaseUrl()."/galeria/videos/".$video["ds_slug_noticia"]?>"><?=$video["ds_titulo"]?></a></h2>
+                                                                    <div class="wrappercinza">
+                                                                    <div class="overlay_play">
+                                                                        <a href="<?=$this->BaseUrl()."/galeria/videos/".$video["ds_slug_noticia"]?>">
+                                                                            <img src="<?php echo $this->BaseUrl()?>/img/homesite/ico/play_hover.png" />
+                                                                        </a>
+                                                                    </div>
+                                                                    <a href="<?=$this->BaseUrl()."/galeria/videos/".$video["ds_slug_noticia"]?>">
+                                                                        <img src="<?=$imgVideo?>" alt="<?=$video["ds_titulo"]?>" width="188" height="128" />
+                                                                    </a>
+
+                                                                    <a class="corta_titulo" href="<?=$this->BaseUrl()."/galeria/videos/".$video["ds_slug_noticia"]?>"><span><?=$video["ds_descricao"]?></span></a>
+                                                                    </div>
+                                                                </article>
+                                                        <?php
+                                                        }}?>
+                                                    </div>
+                                                </div>
+                                                <div id="galeriah" class="hide">
+
+                                                    <div class="coluna_noticias">
+                                                        <?php
+                                                        if(isset($this->galeriaImagem)){
+                                                        foreach ($this->galeriaImagem as $imagem){
+
+                                                             if($imagem['ds_url_imagem'] != ""){
+                                                                $url = $imagem['ds_url_imagem'];
+                                                                $class="";
+                                                            }else{
+                                                                $url = "";
+                                                                $class="display:none";
+                                                            }
+                                                        ?>
+                                                            <article>
+                                                                <h2><a href="<?=$this->BaseUrl()."/galeria/fotos/".$imagem["ds_slug_noticia"]?>"><?=$imagem["ds_titulo"]?></a></h2>
+                                                                <div class="wrappercinza">
+                                                                <a href="<?=$this->BaseUrl()."/galeria/fotos/".$imagem["ds_slug_noticia"]?>">
+                                                                    <img src="<?=$urlNoticia.$url?>" alt="<?=$imagem["ds_titulo"]?>" width="188" height="128" />
+                                                                </a>
+                                                                <a class="corta_titulo" href="<?=$this->BaseUrl()."/galeria/fotos/".$imagem["ds_slug_noticia"]?>"><span><?=$imagem["ds_descricao"]?></span></a>
+                                                                </div>
+                                                            </article>
+                                                        <?php
+                                                        }}?>
+                                                    </div>
+                                                </div>
+                                        </div>
+
+                                    </div>
+                                    <div id="bloco4" class="portlet">
+                                    <?php
+                                        switch ($this->posicao[9]['ds_div']) {
+                                            case "bloco1": echo $this->render('homesite/includes/bloco1.phtml');
+                                                break;
+                                            case "bloco2":  echo $this->render('homesite/includes/bloco2.phtml');
+                                                break;
+                                            case "bloco3": echo $this->render('homesite/includes/bloco3.phtml');
+                                                break;
+                                            case "bloco4": echo $this->render('homesite/includes/bloco4.phtml');
+                                                break;
+                                            case "bloco5": echo $this->render('homesite/includes/bloco5.phtml');
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    ?>
+                                    </div>
+                                    <div id="bloco5" class="portlet">
+                                    <?php
+                                        switch ($this->posicao[10]['ds_div']) {
+                                            case "bloco1": echo $this->render('homesite/includes/bloco1.phtml');
+                                                break;
+                                            case "bloco2":  echo $this->render('homesite/includes/bloco2.phtml');
+                                                break;
+                                            case "bloco3": echo $this->render('homesite/includes/bloco3.phtml');
+                                                break;
+                                            case "bloco4": echo $this->render('homesite/includes/bloco4.phtml');
+                                                break;
+                                            case "bloco5": echo $this->render('homesite/includes/bloco5.phtml');
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    ?>
+                                    </div>
+                                </div>
+
+                                </div>
+
+                                <div class="coluna_right mtop2">
+                                    <div class="newsletter_home">
+                                        <div class="edicao_barra">
+                                            <?=$this->formSelect("id_situacao_cadastro7",$this->posicao[6]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(7);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                                        </div>
+                                         <h2>newsletter</h2>
+                                         <p>A informação diretamente no seu email!</p>
+
+                                         <form action="#" method="post" id="newsletter_form" name="newsletter_form">
+                                           <fieldset>
+                                             <input type="text" name="nome" value="Nome" id="nome" onblur="if(this.value == '') {this.value = 'Nome';}" onfocus="if(this.value == 'Nome') {this.value = '';}" maxlength="180"/>
+                                           </fieldset>
+                                           <fieldset>
+                                             <input type="text" name="email" id="email" value="Email" onblur="if(this.value == '') {this.value = 'Email';}" onfocus="if(this.value == 'Email') {this.value = '';}" maxlength="180"/>
+                                             <input type="submit" name="cadastrar" value="Cadastrar"/>
+                                           </fieldset>
+                                         </form>
+                                 </div>
+                                    <div class="pub2">
+                                        <div class="edicao_barra">
+                                            <?=$this->formSelect("id_situacao_cadastro12",$this->posicao[11]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(12);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                                        </div>
+                                            <img src="<?php echo $this->BaseUrl()?>/img/homesite/img-temporary/diadora.jpg" alt="" width="300" height="250" />
+                                    </div>
+                                <!--Final Box Publicidade-->
+                                    <div class="tabsgenericas">
+                                        <div class="edicao_barra">
+                                            <?=$this->formSelect("id_situacao_cadastro13",$this->posicao[12]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(13);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                                        </div>
+                                        <ul>
+                                        <li><a href="#guia_tenis_1">guia do tênis</a></li>
+                                        <li><a href="#oxigeniotv1">oxigênio tv</a></li>
+                                        </ul>
+
+                                        <div id="guia_tenis_1" class="tdcenter">
+                                            <img src="<?php echo $this->BaseUrl()?>/img/homesite/ico/tenis.jpg" alt="" width="144" height="105" />
+                                            <form id="guia_tenis_1_form" method="POST" action="<?=$this->url(array('controller' => 'guiadotenis', 'action' => "index")); ?>">
+                                            <select class="custom" name="categoria">
+                                                    <option value="">Categoria</option>
+                                                    <option value="1">Amortecimento</option>
+                                                    <option value="3">Competição</option>
+                                                    <option value="4">Estabilidade  </option>
+                                                    <option value="5">Leveza</option>
+                                                    <option value="8">Levíssimo</option>
+                                                    <option value="2">Minimalista</option>
+                                                    <option value="7">Multipisada</option>
+                                                    <option value="6">Trilha</option>
+                                            </select>
+                                            <select class="custom" name="marca">
+                                                <option title="Todos" value="">Marca</option>
+                                                <option value="1">Adidas</option>
+                                                <option value="2">Asics</option>
+                                                <option value="5">Brooks</option>
+                                                <option value="7">Fila</option>
+                                                <option value="21">K-Swiss</option>
+                                                <option value="8">Mizuno</option>
+                                                <option value="9">New Balance</option>
+                                                <option value="23">Newton</option>
+                                                <option value="10">Nike</option>
+                                                <option value="11">Olympikus</option>
+                                                <option value="25">Pearl Izumi</option>
+                                                <option value="12">Puma</option>
+                                                <option value="14">Reebok</option>
+                                                <option value="16">Saucony</option>
+                                                <option value="22">Skechers</option>
+                                                <option value="24">Vibram</option>
+                                            </select>
+
+                                            <select class="custom" name="pisada">
+                                                <option value="">Pisada</option>
+                                                <option id="item-1" value="1">Pronação</option>
+                                                <option id="item-2" value="2">Neutro</option>
+                                                <option id="item-3" value="3">Supinação</option>
+                                            </select>
+                                            <input type="submit" value="resultado" class="btn_laranja" />
+                                            </form>
+                                        </div>
+                                        <div id="oxigeniotv1" class="hide">
+                                            <h3><a href="<?=$this->BaseUrl()."/galeria/videos/".$this->videoDestaque["ds_slug_noticia"]?>">
+                                                <?=$this->videoDestaque["ds_titulo"];?></a>
+                                            </h3>
+                                            <iframe src="<?=$this->videoDestaque["ds_embed"]?>" width="272" height="235" frameborder="0"></iframe>
+                                        </div>
+                                    </div>
+
+                                    <div class="tabsgenericas">
+                                        <div class="edicao_barra">
+                                            <?=$this->formSelect("id_situacao_cadastro14",$this->posicao[13]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(14);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                                        </div>
+                                        <ul>
+                                        <li><a href="#massacorporal">massa corporal</a></li>
+                                        <li><a href="#temporun">tempo run</a></li>
+                                        </ul>
+
+                                        <div id="massacorporal" class="tdcenter">
+                                            <img src="<?php echo $this->BaseUrl()?>/img/homesite/ico/massa-corporal.jpg" alt="" width="163" height="104" />
+                                            <span class="texto_desc">Índice de massa corporal (IMC) <a class="question" title="O índice de massa corporal (IMC) é uma medida de grau de obesidade de uma pessoa por meio de cálculo." href="javascript:;">?</a></span>
+                                            <form id="massa">
+                                            <fieldset>
+                                                <input type="text" name="altura" id="massa_altura" class="custom" placeholder="altura" />
+                                                <input type="text" name="peso" id="massa_peso" class="custom" placeholder="peso" />
+                                            </fieldset>
+                                            <input type="submit" class="btn_laranja" value="resultado">
+
+                                            </form>
+
+                                        </div>
+
+                                        <div id="temporun" class="hide tdcenter">
+                                            <img src="<?php echo $this->BaseUrl()?>/img/homesite/ico/statistics.png" alt="" width="111" height="60" />
+                                            <span class="texto_desc">Tempo Run <a class="question" title="A calculadora Tempo Run projeta o tempo para uma distância almejada, baseando-se no seu desempenho atual em outra distância." href="javascript:;">?</a></span>
+                                            <form id="tempo_form">
+                                            <fieldset>
+                                                <input type="text" name="distancia_percorrida" id="distancia_percorrida" class="custom" placeholder="Distância Percorrida" />
+                                                <input type="text" name="d_tempo" id="d_tempo" class="custom" placeholder="Tempo" />
+                                                <input type="text" name="d_planejada" id="d_planejada" class="custom" placeholder="Distância Planejada" />
+                                            </fieldset>
+                                            <input type="submit" class="btn_laranja" value="resultado">
+
+                                            </form>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="tabsgenericas" id="calcular_calorias">
+                                        <div class="edicao_barra">
+                                            <?=$this->formSelect("id_situacao_cadastro15",$this->posicao[14]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(15);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                                        </div>
+                                        <ul>
+                                        <li><a href="#calorias">calcular calorias</a></li>
+                                        <li><a href="#pulseira">pulseira de ritmo</a></li>
+                                        </ul>
+
+
+                                        <div id="calorias" class="tdcenter">
+                                            <img src="<?php echo $this->BaseUrl()?>/img/homesite/ico/banana.jpg" alt="" width="155" height="95" />
+                                            <span class="texto_desc">Calculadora de calorias <a class="question" title="A calculadora de calorias indica quantas calorias você perde ao correr uma determinada distância." href="javascript:;">?</a></span>
+                                            <form id="calorias_form">
+                                            <fieldset>
+                                                <input type="text" name="distancia_p" id="distancia_p" class="custom" placeholder="distância percorrida" />
+                                                <input type="text" name="peso1" id="peso1" class="custom" placeholder="peso" />
+                                            </fieldset>
+                                            <input type="submit" class="btn_laranja" value="resultado">
+                                            </form>
+                                        </div>
+                                        <div id="pulseira" class="hide tdcenter">
+                                            <img src="<?php echo $this->BaseUrl()?>/img/homesite/ico/pulseira-ritmo.png" alt="" width="155" height="73" />
+                                            <span class="texto_desc">Pulseira de Ritmo <a class="question" title="Alcance sua meta nas provas e treinos! A pulseira é a ferramenta ideal para monitorar seu ritmo, km a km, em qualquer distância." href="javascript:;">?</a></span>
+                                            <form id="pulseira_form">
+                                            <fieldset>
+                                                <input type="text" name="distancia1" id="distancia1" class="custom" placeholder="distância" />
+                                                <input type="text" name="tempo1" id="tempo1" class="custom" placeholder="tempo" />
+                                            </fieldset>
+                                            <input type="submit" class="btn_laranja" value="resultado">
+                                            </form>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                </div>
+
+            <!--FINAL CONTENT-->
+
+        <!--FINAL CONTENT PARA ELEMENTOS FLUTUANTES DE PUBLICIDADE-->
+        </div>
+
+
+    </div>
+    <!--CONTAINER**FIM-->
+        </td>
+          </tr>
+          <tr>
+          <td height="30" class="table-interna-base">
+          &nbsp;
+          </td>
+          </tr>
+          </tbody></table>
+
+<script>
+
+       	$(document).ready(function(){
+
+
+        });
+
+        function situacao(posicao){
+            var msg;
+            var valor = $("#id_situacao_cadastro"+posicao).val();
+            if(valor == 1){
+
+                msg= "ativado";
+
+            }else{
+
+                msg= "desativado";
+
+            }
+
+            $.ajax({
+                     type: "POST",
+                     url: "<?php echo $this->url(array('controller' => 'homesite', 'action' => 'mudasituacao')); ?>",
+                     data: {id_home_site_posicao: posicao, id_situacao_cadastro:valor},
+                     success: function(data)
+                    {
+                        if(data == 'TRUE'){
+                            alert("Bloco "+msg+" com sucesso!");
+
+                        }else{
+                            alert("Erro: "+msg);
+
+                        }
+
+                    }
+            });
+
+        }
+</script>

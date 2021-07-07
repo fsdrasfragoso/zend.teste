@@ -1,0 +1,74 @@
+<div class="card border">
+    <div class="card-body">
+        <form name="formUsuario" id="formUsuario" method="POST" enctype="multipart/form-data" required>
+            
+            <div class="form-group">
+                <label for="label_name">Nome</label>
+                <input type="text" class="form-control" name="nome" id="nome" value="<?=$this->usuario['nome']?>" placeholder="Nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Sobrenome</label>
+                <input type="text" class="form-control" name="sobrenome" id="sobrenome" value="<?=$this->usuario['sobrenome']?>" placeholder="Sobrenome" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="label_name">E-mail</label>
+                <input type="text" class="form-control" name="email" id="email" value="<?=$this->usuario['email']?>" placeholder="email" required>
+            </div>            
+
+            <div class="form-group">
+                <label for="label_name">Imagem</label>
+                <input type="file" class="form-control" name="imagem" id="imagem" value="<?=$this->usuario['imagem']?>" placeholder="imagem" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Estado</label>
+                <input type="text" class="form-control" name="estado" id="estado" value="<?=$this->usuario['estado']?>" placeholder="Estado" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Cidade</label>
+                <input type="text" class="form-control" name="cidade" id="cidade" value="<?=$this->usuario['cidade']?>" placeholder="Cidade" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Bairro</label>
+                <input type="text" class="form-control" name="bairro" id="bairro" value="<?=$this->usuario['bairro']?>" placeholder="Bairro" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Rua</label>
+                <input type="text" class="form-control" name="rua" id="rua" value="<?=$this->usuario['rua']?>" placeholder="rua" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Numero</label>
+                <input type="number" class="form-control" name="numero" id="numero" value="<?=$this->usuario['numero']?>" placeholder="numero" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Complemento</label>
+                <input type="text" class="form-control" name="complemento" id="complemento" value="<?=$this->usuario['complemento']?>" placeholder="Complemento" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria_descricao">Observações</label>
+                <textarea name="observacoes" class="form-control"  id="observacoes"> <?=$this->usuario['observacoes']?> </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Status</label>
+                <select class="form-control" name="status" id="status">
+                        <option value="1"> Ativo</option>
+                        <option value="0"> Inativo </option>
+                </select>
+            </div>
+
+
+            <a type="submit" class="btn btn-primary btn-sm" href="javascript:update('<?=$this->url(array('controller' => 'usuario', 'action' => "update"));?>')" required>Salvar</a>
+            <a type="cancel" class="btn btn-danger btn-sm" href="javascript:conteudo('<?=$this->url(array('controller' => 'usuario', 'action' => "index"));?>')" required>Cancel</a>
+        </form>
+
+    </div>
+</div>

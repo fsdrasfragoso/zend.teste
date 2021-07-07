@@ -1,0 +1,311 @@
+<?php
+
+    // url do menu pai
+    if($this->data['id_contexto']<>""){
+            $url_pai = "";
+            $id_c ="";
+            $id_c = $this->data['id_contexto'];
+            $id_p = $this->data['id_menu_contexto_pai'];
+
+    //select menu Pai
+            $MenuselectpaiModel = new MenuselectpaiModel();
+            $menu_pai1 = $MenuselectpaiModel->getmenupai1($id_c);
+            $menu_filho1 = $MenuselectpaiModel->getmenufilho1($id_p);
+
+    } else {
+            $url_pai = "";
+            $id_c ="";
+    }
+
+?>
+<script src="<?php echo $this->BaseUrl()?>/js/ckeditor/ckeditor.js"></script>
+  <div class="barra-tarefas">
+
+    <div id="cadstro">
+     <!-- <h3>Cadastro</h3>-->
+       <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td height="30" class="table-interna-top">
+                      <div class="titulo-area">HomeSite</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="degrade-list-left degrade-list-right degrade" height="30">&nbsp;</td>
+            </tr>
+          </tr>
+          <tr style="background:#FFF;">
+          <td>
+
+                            <div class="form">
+                                <fieldset style="float:left; width:48%">
+
+                                    <label>
+                                            <span>Contexto:</span>
+                                            <?=$this->formSelect("id_contexto", 2,array('style' => "margin-left: 10px;"), $this->menu_list,$options = null, $listsep = "<br />\n");?>
+                                    </label>
+
+                                    <label>
+                                             <span>Sessão:</span>
+                                              <?php
+                                                    if($this->data['id_contexto']!=0){
+                                                    ?>
+                                                    <div id="div_3" style="margin:0px;">
+                                                        <?=$this->formSelect("id_menu_contexto_pai", $this->data['id_menu_contexto_pai'],array('style' => 'margin:0;','onchange'=>'altera();') , $menu_pai1,$options = null, $listsep = "<br />\n"); ?>
+                                                    </div>
+                                              <?php
+                                                    } else {
+                                                    echo "<div style='margin-left:5px;float:left;' id='div_2'>selecione um contexto primeiro</div>";
+                                                    }
+                                                    ?>
+                                    </label>
+
+                                    <label id="mfilho" <?php if($this->data['id_menu_contexto_filho']==null){ ?>style="display:none;" <?php } ?>>
+                                            <span>Canal:</span>
+
+                                            <div id="div_3" style="margin:0px;"></div>
+
+                                    </label>
+
+
+                                    <label>
+                                            <span>Lista de Matéria:</span>
+                                    </label>
+                                    <div id="div_noticia"></div>
+                                </fieldset>
+                        <form id="form_homesite" onSubmit="return verificaPermissaoForm(2, <?=$this->id_menu;?>);"  action="<?=$this->url(array('controller' => 'homesite', 'action' => 'save')); ?>" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="id_home_site" id="id_home_site" value="<?=$this->dataNoticia['id_home_site']?>" />
+                                <input type="hidden" name="id_noticia" id="id_noticia" value="<?=$this->dataNoticia['id_noticia']?>" />
+                                <input type="hidden" name="id_contexto" id="id_contexto" value="<?=$this->dataNoticia['id_contexto']?>" />
+                                <input type="hidden" name="id_menu_contexto" id="id_menu_contexto" value="<?=$this->dataNoticia['id_menu_contexto']?>" />
+                                <input type="hidden" name="id_home_site_posicao" id="id_home_site_posicao" value="<?=$this->dataNoticia['id_home_site_posicao']?>" />
+                                <input type="hidden" name="nr_ordem" id="nr_ordem" value="<?=$this->dataNoticia['nr_ordem']?>" />
+                                <fieldset  style="float:left; width:48%">
+                                    <label>
+                                        <span>Canal:</span>
+                                        <div id="ds_url_imagem" >
+                                            <img src="<?php echo $this->BaseUrl()?>/upload/noticia/<?=$this->dataNoticia['ds_url_imagem'];?>" width="200" style="margin-left:5px;"/>
+                                        </div>
+                                    </label>
+                                    <label><?=$this->formText("ds_titulo", $this->dataNoticia['ds_titulo'], array("placeholder"=>"Título"));?></label>
+                                    <label><?=$this->formTextarea("ds_subtitulo", $this->dataNoticia['ds_subtitulo'], array("placeholder"=>"Descrição", "style"=>"height:150px;width:595px;"));?></label>
+                                    <label>
+                                            <a href="<?=$this->url(array('controller' => 'homesite', 'action' => 'index')); ?>" class="back">Cancelar</a>
+                                            <input type="submit" class="resultado" value="Salvar" />
+                                    </label>
+
+                                </fieldset>
+                        </form>
+                        </div>
+            </td>
+          </tr>
+          <tr>
+            <td height="30" class="table-interna-base">&nbsp;</td>
+          </tr>
+          </table>
+    </div>
+  </div>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+        CKEDITOR.replace( 'tx_noticia' );
+
+        var id_home_site_posicao = $("#id_home_site_posicao").val();
+        var nr_ordem = $("#nr_ordem").val();
+
+        if(id_home_site_posicao == 1){
+            $("#ds_url_imagem").hide();
+            if(nr_ordem != 1){
+                $("#ds_subtitulo").hide();
+
+            }
+
+        }
+
+        var id_contexto = $("#id_contexto").val();
+
+        $("#mfilho").hide();
+        $("#div_3").html('Selecione o menu pai primeiro...');
+
+        if(id_contexto != ""){
+
+                $("#div_2").html('Consultando menu do contexto...');
+
+                $.ajax({
+                         type: "POST",
+                         url: "<?php echo $this->url(array('controller' => 'menuselectpai', 'action' => 'getmenupai')); ?>",
+                         data: "id_contexto=" + id_contexto,
+                         success: function(resp)
+                        {
+
+                                        $('#div_2').html($('#inner2' , resp+"/").html());
+
+
+                        }
+                });
+
+        } else {
+
+                $('#id_contexto').focus();
+
+        }
+
+        //validação do form
+        $("#form_homesite").validate({
+                rules:{
+                        id_contexto: "required",
+                        ds_titulo: "required",
+                        ds_descricao: "required",
+                        tx_noticia: "required",
+                        dt_noticia: "required"
+                },
+        errorPlacement: function (error, element) {
+
+        }
+        });
+
+        //menu pai
+        $("#id_contexto").change(function(){
+                var id_contexto = $("#id_contexto").val();
+
+                $("#tipo_noticia").show();
+                $("#ds_tipo_noticia1").attr("checked",true);
+
+                if(id_contexto == 4){
+                    $("#ds_tipo_noticia3").attr("checked",true);
+                    $("#tipo_noticia").hide();
+                    $("#ds_tipo_noticia3").hide();
+                    $("#lbTags").show();
+                    $("#divTags").show();
+                    $("#lbVideo").show();
+                    $("#divVideo").show();
+                }
+                $("#mfilho").hide();
+                $("#div_3").html('Selecione o menu pai primeiro...');
+
+                if(id_contexto != ""){
+
+                        $("#div_2").html('Consultando menu do contexto...');
+
+                        $.ajax({
+                                 type: "POST",
+                                 url: "<?php echo $this->url(array('controller' => 'menuselectpai', 'action' => 'getmenupai')); ?>",
+                                 data: "id_contexto=" + id_contexto,
+                                 success: function(resp)
+                                {
+
+                                                $('#div_2').html($('#inner2' , resp+"/").html());
+
+
+                                }
+                        });
+
+                } else {
+
+                        $('#id_contexto').focus();
+
+                }
+
+                return false;
+        });
+
+    });
+
+function gridnoticia(){
+                var valor;
+                var tipo;
+                var id_menu_contexto_pai = $("#id_menu_contexto_pai").val();
+                var id_menu_contexto_filho = $("#id_menu_contexto_filho").val();
+                if(id_menu_contexto_filho == null){
+
+                    valor = id_menu_contexto_pai;
+                    tipo = 1;
+
+                        $.ajax({
+                                type: "POST",
+                                url: "<?php echo $this->url(array('controller' => 'noticia', 'action' => 'gridnoticia')); ?>",
+                                data: {valor: valor,tipo: tipo},
+                                success: function(resp)
+                               {
+                                       $('#div_noticia').html(resp);
+
+                               }
+                       });
+                }else{
+                    valor = id_menu_contexto_filho;
+                    tipo = 2;
+
+                        $.ajax({
+                                type: "POST",
+                                url: "<?php echo $this->url(array('controller' => 'noticia', 'action' => 'gridnoticia')); ?>",
+                                data: {valor: valor,tipo: tipo},
+                                success: function(resp)
+                               {
+                                       $('#div_noticia').html(resp);
+
+                               }
+                       });
+                }
+
+                return false;
+}
+
+function altera(){
+                $("#mfilho").show();
+
+                var id_menu_contexto_pai = $("#id_menu_contexto_pai").val();
+
+
+                if(id_menu_contexto_pai != ""){
+
+                        $("#div_3").html('Consultando submenu...');
+
+                        $.ajax({
+                                 type: "POST",
+                                 url: "<?php echo $this->url(array('controller' => 'menuselectpai', 'action' => 'getmenufilho')); ?>",
+                                 data: "id_menu_contexto_pai=" + id_menu_contexto_pai,
+                                 success: function(resp)
+                                {
+
+                                                $('#div_3').html($('#inner3' , resp+"/").html());
+                                                gridnoticia();
+
+
+                                }
+                        });
+
+                } else {
+
+                        $('#id_menu_contexto_pai').focus();
+
+                }
+
+                return false;
+
+}
+
+function alterafilho(){
+    gridnoticia();
+}
+
+//adicionarNoticia
+function adicionarNoticia(id_noticia, id_contexto, id_menu_contexto_pai, id_menu_contexto_filho, ds_titulo, ds_subtitulo, ds_url_imagem){
+
+var id_menu_contexto;
+
+if(id_menu_contexto_filho == 0){
+    id_menu_contexto = id_menu_contexto_pai;
+
+}else{
+    id_menu_contexto = id_menu_contexto_filho;
+}
+            $("#ds_titulo").val(ds_titulo);
+            $("#ds_subtitulo").val(ds_subtitulo);
+            $("#id_noticia").val(id_noticia);
+            $("#id_contexto").val(id_contexto);
+            $("#id_menu_contexto").val(id_menu_contexto);;
+            $('#ds_url_imagem').html('<img src="<?php echo $this->BaseUrl()?>/upload/noticia/' + ds_url_imagem + '"width="200" style="margin-left:5px;"/>');
+
+}
+
+</script>

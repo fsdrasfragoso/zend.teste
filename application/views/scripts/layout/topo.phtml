@@ -1,0 +1,30 @@
+
+
+<div id="log"></div>
+  <div id="header">
+    <div class="topo">
+      <div class="marca">
+        <a href="<?php echo $this->BaseUrl(); ?>"><img src="<?php echo $this->BaseUrl(); ?>/img/logo.png" /></a>
+      </div>
+	 
+	
+	 
+	
+	
+      <div class="info">
+       
+        
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divisao">&nbsp;<span style="float:right;color:#ffffff;font-size:10px;margin-right:10px;">
+  <?php
+  $versao = trim(Zend_Version::getLatest());
+
+	if($versao == "not available"){
+		$versao = "1.12.1";
+	}
+	  echo $versao;
+  ?>
+  </span></div>

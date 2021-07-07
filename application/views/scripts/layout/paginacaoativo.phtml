@@ -1,0 +1,55 @@
+<div class="pagination-area">
+    <nav>
+        <ul class="pagination">
+            <?php
+            $urlCurrent = array();
+            $urlPrev = array();
+            $urlNext = array(
+                'controller' => $this->controllerName, 
+                'action' => $this->actionName, 
+                'pg_atual' => min(array(($this->pg_atual+1), $this->total_paginas)), 
+                'num_pgs' => $this->num_pgs
+            );
+            //Caso tenha parametros adicionais
+            //page_param Ex: array("id_evento" => $this->id_evento,"ds_cod" => $this->ds_cod)
+            if (is_array($this->page_param) && count($this->page_param)>0) {
+                foreach($this->page_param as $nmCampo=>$vl) {
+                    if ($vl != '') $urlNext[$nmCampo] = $vl;//Adiciono os campos do filtro
+                }
+            }
+            //Defino o array da página atual e anterior
+            $urlPrev = $urlNext;
+            $urlCurrent = $urlNext;
+            
+            if ($this->pg_atual!=1) {
+                $urlPrev['pg_atual'] = min(array(($this->pg_atual-1), $this->total_paginas));
+            ?>            
+                <li class="prev-btn-pag click-link-pagination">
+                    <a href="<?php echo $this->url($urlPrev); ?>" aria-label="Prev">
+                        <span aria-hidden="true"><i class="fa fa-chevron-left"></i></span>
+                    </a>
+                </li>
+            <?php }?>
+            <?php 
+            for ($page=$this->pg_atual;$page<($this->limite_pgs+$this->pg_atual);$page++){
+                if ($page<=$this->total_paginas) {
+                    $urlCurrent['pg_atual'] = min(array(($page), $this->total_paginas));
+            ?>
+                <li class="<?php if ($this->pg_atual == $page) echo 'active';?> click-link-pagination">                    
+                    <span> <a href="<?php echo $this->url($urlCurrent); ?>"><?php echo $page; ?></a> <span class="sr-only">(current)</span></span>
+                </li>
+            <?php
+                }
+            }
+            if ($page>1) {
+            ?>
+                <li class="click-link-pagination">
+                    <a href="<?php echo $this->url($urlNext); ?>" aria-label="Next">
+                        <span aria-hidden="true"><i class="fa fa-chevron-right"></i></span>
+                    </a>
+                </li>
+            <?php }?>
+        </ul>
+        <?php //echo "Total: " .$this->total_paginas;?>
+    </nav>
+</div>

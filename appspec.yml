@@ -1,0 +1,20 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/ativos/producao.adm.ativo.com_temp
+  - source: public/index.php
+    destination: /var/www/ativos/.repo/producao.adm.ativo.com/public
+permissions:
+  - object: /var/www/ativos/producao.adm.ativo.com_temp
+    owner: php-fpm
+    group: php-fpm
+  - object: /var/www/ativos/.repo/producao.adm.ativo.com
+    owner: root
+    group: root
+    mode: 444
+hooks:
+  AfterInstall:
+    - location: codedeploy_scripts/AfterInstall.sh
+      timeout: 320
+      runas: root

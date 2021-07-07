@@ -1,0 +1,57 @@
+<script language="javascript">
+	function doPaginacao(url)
+	{
+		count = $("#count").val();
+		window.location = url+'/num_pgs/'+count;
+	}
+	
+	$(document).ready(function(){
+		$("#paginacao_<?=$this->pg_atual;?>").css("color", "white");
+		$("#paginacao_<?=$this->pg_atual;?>").css("background", "#666");
+	});
+	
+	
+	function historico_content(id_evento, pg_atual, total_paginas, num_pgs)
+	{
+		$("#historico_content").html("");
+		url_action = "<?=$this->url(array('controller' => 'evento', 'action' => 'historicoaprovacao')); ?>";
+		$.ajax({
+			url: url_action, 
+			type: "POST", 
+			data: {id_evento: id_evento, historico_content: '1', pg_atual: pg_atual, total_paginas: total_paginas, num_pgs: num_pgs}, 
+			success: function(data){
+				$("#historico_content").html(data);
+				$("#pg_atual").val(pg_atual);
+			}, 
+			async: false
+		});
+		
+	}
+		
+</script>
+
+<table align="right" style="background: url('<?=$this->BaseUrl();?>/img/background.png') repeat-x; height:27px; width: 288px;">
+	<tr>
+		<td><?php 
+		$url = $this->BaseUrl()."/index.php/".$this->controllerName."/".$this->actionName."/id_menu/".$this->id_menu.$this->more;
+                
+                /*$procura10 = strpos($_SERVER['REQUEST_URI'], "num_pgs/10");
+                $procura20 = strpos($_SERVER['REQUEST_URI'], "num_pgs/20");
+                $procura30 = strpos($_SERVER['REQUEST_URI'], "num_pgs/30");
+                $procura40 = strpos($_SERVER['REQUEST_URI'], "num_pgs/40");
+                $procura50 = strpos($_SERVER['REQUEST_URI'], "num_pgs/50");                
+                $url = $this->BaseUrl().$_SERVER['REQUEST_URI'];
+                 */
+                
+		echo $this->formSelect("count", $this->num_pgs, array("onChange" => "doPaginacao('".$url."')"), array("10" => "10", "20"=> "20", "30" => "30", "40" => "40", "50" => "50")); 
+  		?></td>
+  		<td><img src="<?=$this->BaseUrl();?>/img/separador.png" /></td>
+  		<td><a href="javascript:void(0);" onclick="historico_content(<?=$this->id_evento;?>, 1, <?=$this->total_paginas;?>, <?=$this->num_pgs;?>);"><img src="<?=$this->BaseUrl();?>/img/voltar_tudo.png" /></a></td>
+  		<td><a href="javascript:void(0);" onclick="historico_content(<?=$this->id_evento;?>, <?=max(array(($this->pg_atual-1), 1));?>, <?=$this->total_paginas;?>, <?=$this->num_pgs;?>);"><img src="<?=$this->BaseUrl();?>/img/voltar.png" /></a></td>
+  		<td><img src="<?=$this->BaseUrl();?>/img/separador.png" /></td>
+  		<td>Page <input id="pg_atual" name="pg_atual" value="<?php echo $this->pg_atual; ?>" style="width: 53px;">of <?=$this->total_paginas;?></td>
+  		<td><img src="<?=$this->BaseUrl();?>/img/separador.png" /></td>
+  		<td><a href="javascript:void(0);" onclick="historico_content(<?=$this->id_evento;?>, <?=min(array(($this->pg_atual+1), $this->total_paginas));?>, <?=$this->total_paginas;?>, <?=$this->num_pgs;?>);"><img src="<?=$this->BaseUrl();?>/img/avancar.png" /></a></td>
+  		<td><a href="javascript:void(0);" onclick="historico_content(<?=$this->id_evento;?>, <?=$this->total_paginas;?>, <?=$this->total_paginas;?>, <?=$this->num_pgs;?>);"><img src="<?=$this->BaseUrl();?>/img/avancar_tudo.png" /></a></td>
+	</tr>	
+</table>

@@ -1,0 +1,28 @@
+<?php
+
+$urlNoticia = $this->BaseUrl().'/upload/noticia/';
+
+?>
+
+                                    <div class="coluna_noticias portlet" id="bloco3">
+                                        <div class="edicao_barra">
+                                            <?=$this->formSelect("id_situacao_cadastro8",$this->posicao[7]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(8);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                                        </div>
+                                <ul class="col_not">
+                                <?php
+                                        foreach ($this->dadosb3 as $resultado): ?>
+
+                                                    <li class="draggable1" data-position="<?=$resultado["nr_ordem"];?>" data-id="<?=$resultado["id_noticia"];?>">
+                                                        <h2><a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>"><?=$resultado["nm_item"]?></a></h2>
+                                                        <a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>">
+                                                            <img src="<?=$urlNoticia.$resultado['ds_url_imagem']?>" alt="<?=$resultado["ds_titulo"]?>" width="188" height="126"/></a>
+                                                        <a class="corta_titulo editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>"><span><?=$resultado["ds_titulo"]?></span></a>
+                                                        <p><a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>"><?=$resultado["ds_subtitulo"]?></a></p>
+                                                        <div class="veja_mais"><a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>">Ler Matéria Completa</a></div>
+                                                    </li>
+                                            <?php
+
+                                        endforeach;
+                                ?>
+                                </ul>
+                                    </div>

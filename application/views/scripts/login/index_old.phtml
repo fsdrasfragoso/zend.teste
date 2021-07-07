@@ -1,0 +1,37 @@
+<?php 
+?>
+<script language="javascript">
+	$(document).ready(function(){
+		$("#login").validate({
+			rules:{
+				nome: {
+					required: true,
+					email: true
+				},
+				senha: "required"
+			},
+        errorPlacement: function (error, element) {
+            
+        }
+		});
+	});
+
+</script>
+
+<?php
+if($this->erro)
+	echo "Usuário ou senha incorreta ou usuário não autorizado.";
+?>
+    <form action="<?=$this->url(array('controller' => 'login', 'action' => 'valida')); ?>" method="post" id="login">
+      <fieldset>
+        <label>
+          <span>Login:</span><input type="text" class="nome" name="nome" />
+        </label>
+        <label>
+          <span>Senha:</span><input type="password" class="senha" name="senha" />
+        </label>
+        <label>
+          <input type="submit" class="enviar" value="Entrar" />
+        </label>
+      </fieldset>
+    </form>

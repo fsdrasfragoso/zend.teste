@@ -1,0 +1,19 @@
+
+                                        <div id="mais_noticias_home">
+                                            <div class="edicao_barra">
+                                            <?=$this->formSelect("id_situacao_cadastro10",$this->posicao[9]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(10);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                                            </div>
+                                            <h2>mais notícias</h2>
+                                            <ul class="col_not">
+                                        <?php
+                                            foreach ($this->dadosb4 as $resultado): ?>
+
+                                                        <li class="headline draggable1" data-position="<?=$resultado["nr_ordem"];?>" data-id="<?=$resultado["id_noticia"];?>">
+                                                            <h3><a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>"><?=$resultado["nm_item"]?>:</a></h3>
+                                                            <a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>"><?=$resultado["ds_titulo"]?></a>
+                                                        </li>
+                                                <?php
+                                            endforeach;
+                                        ?>
+                                                    </ul>
+                                        </div>

@@ -1,0 +1,47 @@
+<script>
+$(window).load(function(){
+	$("form").append('<input type="hidden" name="pg_atual" class="pg_atual" value="<?=$this->pg_atual?>" /><input type="hidden" name="num_pgs" class="num_pgs" value="<?=$this->num_pgs?>" />');
+	$(".ir").on('click',function(){
+		var ir = $(this).attr('rel');
+		$(".pg_atual").val(ir);
+		$("form").submit();
+	});
+	$("#count").change(function(){
+		var ir = $(this).find("option:selected").val();
+		$(".num_pgs").val(ir);
+		$("form").submit();
+	});
+	$("#bt_pesquisa").click(function(){
+		$(".num_pgs").val("");
+		$(".pg_atual").val("");
+	});
+
+});
+</script>
+<style>
+    #count {width:56px;}
+</style>
+<style type="text/css">
+.pagSelect select, .pagInput input{
+border:none; background:none; color:#FFF; margin-right:2px; font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;}
+</style>
+<table style="background:#53575a !important; height:27px; width: 388px; color:#FFF !important; margin-top: 0px; margin-bottom: -2px;">
+	<tr>
+		<td>
+	        <?//=$this->formSelect("count", $this->num_pgs, array(), array("10" => "10", "20"=> "20", "30" => "30", "40" => "40", "50" => "50")); ?>
+	        <?=$this->formSelect("count", $this->num_pgs, array(), array("10" => "10", "50"=> "50", "100" => "100", "300" => "300", "500" => "500")); ?>
+        </td>
+        <td><img src="<?=$this->BaseUrl();?>/img/separador.png" style="display:none;" /></td>
+        <?php if($this->pg_atual > 1) {?>
+            <td><a href="javascript:void(0);" class="ir" rel="1"><img src="/img/icoVoltar_tudo.png"></a></td>
+            <td><a href="javascript:void(0);" class="ir" rel="<?=$this->pg_atual-1?>"><img src="/img/icoVoltar.png"></a></td>
+        <?php }?>
+            <td><img src="<?=$this->BaseUrl();?>/img/separador.png" style="display:none;" /></td>
+            <td><?=$this->pg_atual?> de <?=$this->total_paginas?></td>
+            <td><img src="<?=$this->BaseUrl();?>/img/separador.png" style="display:none;" /></td>
+        <?php if($this->pg_atual < $this->total_paginas) {?>
+	        <td><a href="javascript:void(0);" class="ir" rel="<?=$this->pg_atual+1?>"><img src="/img/icoAvancar.png"></a></td>
+            <td><a href="javascript:void(0);" class="ir" rel="<?=$this->total_paginas?>"><img src="/img/icoAvancar_tudo.png"></a></td>
+        <?php }?>
+    </tr>
+</table>

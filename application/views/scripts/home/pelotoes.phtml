@@ -1,0 +1,825 @@
+
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+<script>
+    $(document).ready(function() {
+		
+		
+		
+		$("#enviar").click(function(){
+		 if($("#cidade").val() == "" && $("#circuito").val() == "" && $("#evento").val() == "")
+			 {
+				alert("Selecione algum filtro...");
+				return false;
+			 }
+		});
+		
+        
+        $("#dtInicial").datepicker({
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+                dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+                nextText: 'Próximo',
+                prevText: 'Anterior'
+            });
+
+            $("#dtFinal").datepicker({
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+                dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+                nextText: 'Próximo',
+                prevText: 'Anterior'
+            });
+		
+        $("#bt_limpar").bind("click", function() {
+            $("#cidade").val("");
+            $("#circuito").val("");
+            $("#evento").val("");
+            $("#dtInicial").val("");
+            $("#dtFinal").val("");
+
+        });
+		
+		$('ul.tabs li').click(function(){
+			var tab_id = $(this).attr('data-tab');
+
+			$('ul.tabs li').removeClass('current');
+			$('.tab-content').removeClass('current');
+
+			$(this).addClass('current');
+			$("#"+tab_id).addClass('current');
+		})
+				
+		
+		$('#example').DataTable();
+		
+    });
+</script>
+
+<script type="text/javascript">
+function getNewCircuitos() 
+{
+	$("#div_circuito").html("<select><option>Carregando...</option></select>");
+	var id_cidade = $("#cidade").val();
+	//alert(id_cidade);
+	var url = "<?= $this->url(array("controller" => "home", "action" => "buscacircuito")) ?>/id_cidade/"+id_cidade;
+	
+	$.ajax({
+		url:url,
+		success: function(data){
+			$("#div_circuito").html(data);
+		},
+		async: false
+	});	
+}
+
+function getNewEventos() 
+{
+	$("#div_evento").html("<select><option>Carregando...</option></select>");
+	var id_circuito = $("#circuito").val();
+	//alert(id_circuito);
+	var url = "<?= $this->url(array("controller" => "home", "action" => "buscaevento")) ?>/id_circuito/"+id_circuito;
+	
+	$.ajax({
+		url:url,
+		success: function(data){
+			$("#div_evento").html(data);
+		},
+		async: false
+	});	
+}
+
+</script>
+
+<div class="barra-tarefas">
+    <div id="navigation"></div>
+
+    <div class="lista-usuarios" style="padding: 0px; margin-bottom: 26px;">
+        <h3 style="margin:5px 0 0 15px; color:#FFF;">Relatório Pelotões</h3>
+        <div id="lista-usuarios-interna">
+            
+			<form id="filtros" name="filtros" method="post" action="<?=$this->url(array('controller' => 'home', 'action' => "pelotoes")); ?>">
+			
+				<table cellspacing="5" cellpadding="5" border="0">
+				
+					<tr>
+						<td>Cidades:</td>
+						<td>							
+							<?=$this->formSelect("cidade", $this->cidade, array("onChange" => "getNewCircuitos();"), $this->listaCidades);?>
+
+						
+							<!--<select name="cidade" id="cidade">
+								<option value="">Selecione...</option>
+								<option value="">----------------------------------------------------</option>
+								<option value="all">Todas Cidades</option>
+								<option value="">----------------------------------------------------</option>
+								<?
+								#if (@$this->listaCidades){
+								#	foreach ($this->listaCidades as $lista){
+								?>
+									<option value="<?php echo($lista['id_cidade']); ?>"><?php echo($lista['ds_cidade']); ?></option>
+								<?php
+								#	}
+								#}
+								?>
+							</select>-->
+						</td>
+					</tr>
+					<tr>
+						<td>Circuitos:</td>
+						<td>						
+							<div id="div_circuito" class="select">						
+							<?=$this->formSelect("circuito", $this->circuito, array("onChange" => "getNewEventos();"), $this->listaCircuitos);?>
+							</div>
+							
+							<!--<select name="circuito" id="circuito">
+								<option value="">Selecione...</option>
+								<option value="">------------------------------------------------</option>
+								<option value="all">Todos Circuitos</option>
+								<option value="">------------------------------------------------</option>
+								<?
+								#if (@$this->listaCircuitos){
+									#foreach ($this->listaCircuitos as $lista){
+								?>
+									<option value="<?php echo($lista['id_circuito']); ?>"><?php echo($lista['circuito']); ?></option>
+								<?php
+									#}
+								#}
+								?>
+							</select>-->
+						</td>
+					</tr>
+					<tr>
+						<td>Eventos:</td>
+						<td>
+							<div id="div_evento" class="select">
+							<?=$this->formSelect("evento", $this->evento, array(), $this->listaEventos);?>
+							</div>
+						
+							
+							
+							<!--<select name="evento" id="evento">
+								<option value="">Selecione...</option>
+								<option value="">--------------------------------------------------------------------------------------------------------</option>
+								<option value="all">Todos Eventos</option>
+								<option value="">--------------------------------------------------------------------------------------------------------</option>
+								<?
+								#if (@$this->listaEventos){
+								#	foreach ($this->listaEventos as $lista){
+								?>
+									<option value="<?php echo($lista['id_evento']); ?>"><?php echo($lista['dt_evento']); ?> | <?php echo($lista['id_evento']); ?> | <?php echo($lista['ds_evento']); ?></option>
+								<?php
+								#	}
+								#}
+								?>
+							</select>-->
+						</td>
+					</tr>
+					<tr>
+						<td>Data do Resultado: </td>
+						<td>&nbsp;&nbsp;&nbsp; <input name="dtInicial" id="dtInicial" type="text" value="<?php echo ($this->data1=="") ? "" : $this->data1; ?>"/>
+							Até
+							<input name="dtFinal" id="dtFinal" type="text" value="<?php echo ($this->data2=="") ? "" : $this->data2; ?>"/></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;&nbsp;&nbsp; 
+						<input type="submit" name="enviar" id="enviar" value="Executar" />
+						<input type="button" value=" Limpar " id="bt_limpar" name="bt_limpar" />
+						</td>
+					</tr>
+					
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;&nbsp;&nbsp;<font color="red">Importante:</font> Esta Execução pode levar alguns minutos</td>
+					</tr>
+					
+					
+				
+				</table>
+			
+			</form>
+			
+			<?php
+				/*
+				if(!empty($_POST)){
+					echo "<br>Cidade: ".$_POST["cidade"];
+					echo "<br>Circuito: ".$_POST["circuito"];
+					echo "<br>Evento: ".$_POST["evento"];
+					echo "<br>Intervalo: De ".$_POST["dtInicial"]."  à ".$_POST["dtFinal"];
+				}*/
+			?>
+			<br><br><br>
+
+
+			<div class="container">
+
+				<ul class="tabs">
+					<li class="tab-link current" data-tab="lista"><b>Listagem de Usuários</b></li>
+					<li class="tab-link" data-tab="geral"><b>Status Geral</b></li>
+					<li class="tab-link" data-tab="visao-usuarios"><b>Visão Usuários</b></li>
+					<li class="tab-link" data-tab="visao-resultados"><b>Visão Resultados</b></li>
+				</ul>
+
+				<div id="lista" class="tab-content current">
+				
+						<br><br><br><br>
+						&nbsp;&nbsp;&nbsp; Listagem de usuários inscritos no evento ou cidade selecionada acima.
+						<br><br><br>
+						
+
+						<table id="example" class="display" cellspacing="0" width="100%">
+						
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Nome</th>
+									<th>Pelotão</th>
+									<th>Melhor Evento</th>
+									<th>Tempo Total</th>
+									<th>Distância</th>
+									<th>Meses Até Hoje</th>
+									<th>Melhor Pace</th>
+								</tr>
+							</thead>
+					 
+							<!--<tfoot>
+								<tr>
+									<th>ID Usuário</th>
+									<th>Nome</th>
+									<th>CPF</th>
+									<th>Pelotão</th>
+									<th>Pelotão Antigo</th>
+									<th>ID do Evento</th>
+									<th>Evento</th>
+									<th>Data Evento</th>
+									<th>Percurso</th>
+									<th>Tempo Total</th>
+									<th>Meses</th>
+									<th>Pace</th>
+									<th>Ação</th>
+								</tr>
+							</tfoot>-->
+						
+							<!--<tr>
+								<td>ID Usuário</td>
+								<td>Nome</td>
+								<td>CPF</td>
+								<td>Pelotão</td>
+								<td>Pelotão Antigo</td>
+								<td>ID do Evento</td>
+								<td>Evento</td>
+								<td>Data Evento</td>
+								<td>Percurso</td>
+								<td>Tempo Total</td>
+								<td>Meses</td>
+								<td>Pace</td>
+								<td>Ação</td>
+							</tr>-->
+							
+							
+							<tbody>
+							<?php
+							$i = 0;			
+							
+							#print_r($this->data);
+							
+							
+							
+							if (@$this->listagemFull){
+								foreach ($this->listagemFull as $ped){
+									$i++;
+							?>
+								
+								<tr <?php if($i % 2 == 0) { echo "class='par'"; } ?>>
+									<td><?php echo($ped['id_usuario']); ?></td>
+									<td><?php echo($ped['ds_nomecompleto']); ?></td>
+									<td><?php echo($ped['pelotao']); ?></td>
+									<td><?php echo($ped['ds_evento']); ?> | <?php echo($ped['dt_evento']); ?></td>
+									<td><?php echo($ped['nr_tempo_total']); ?></td>
+									<td><?php echo($ped['nr_percurso']); ?></td>
+									<td><?php echo($ped['meses']); ?></td>
+									<td><?php echo($ped['pace_min']); ?></td>
+								</tr>
+								
+							<?php
+								}
+							}
+							?>
+							</tbody>
+						</table>
+						
+						
+						
+						
+						
+				
+				</div>
+				
+				<div id="geral" class="tab-content">
+				
+						<br><br><br><br>
+						Referente a toda base de usuários e  usuários balcão do Ativo.com, independente dos filtros.
+						<br><br><br>
+
+						
+						<table border="0" width="100%">
+							<tr>
+								<td valign="top">
+
+									<table cellspacing="0" cellpadding="0" border="1" width="100%">
+									<tr>
+										<td colspan="3"><center><b>Usuários</b><center></td>
+									</tr>
+									<tr>
+										<td><center>Pelotão<center></td>
+										<td><center>Quantidade<center></td>
+										<td><center>Porcentagem %<center></td>
+									</tr>
+									<?php
+									$i = 0;			
+									
+									#echo "<pre>";print_r($this->geralUsuario);echo "</pre>";
+									$count=count($this->geralUsuario)-1;
+									$total=$this->geralUsuario[$count]['Total'];
+									
+									
+									if (@$this->geralUsuario){
+										foreach ($this->geralUsuario as $info){
+											$i++;
+									?>
+										<tr <?php if($i % 2 == 0) { echo "class='par'"; } ?>>
+											<td><?php echo($info['Pelotao']); ?></td>
+											<td><center><?php echo(number_format($info['Total'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo round($info['Total']/$total*100, 2); ?>%</center></td>
+										</tr>
+									<?php
+										}
+									}
+									?>
+									</table>
+								
+								</td>
+								
+								<td valign="top">
+								
+									<table cellspacing="0" cellpadding="0" border="1" width="100%">
+									<tr>
+										<td colspan="3"><center><b>Usuários Balcão</b><center></td>
+									</tr>
+									<tr>
+										<td><center>Pelotão<center></td>
+										<td><center>Quantidade<center></td>
+										<td><center>Porcentagem %<center></td>
+									</tr>
+									<?php
+									$i = 0;			
+									
+									#echo "<pre>";print_r($this->geralUsuarioBalcao);echo "</pre>";
+									$count=count($this->geralUsuarioBalcao)-1;
+									$total=$this->geralUsuarioBalcao[$count]['Total'];
+									
+									if (@$this->geralUsuarioBalcao){
+										foreach ($this->geralUsuarioBalcao as $info){
+											$i++;
+									?>
+										<tr <?php if($i % 2 == 0) { echo "class='par'"; } ?>>
+											<td><?php echo($info['Pelotao']); ?></td>
+											<td><center><?php echo(number_format($info['Total'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo round($info['Total']/$total*100, 2); ?>%</center></td>
+										</tr>
+									<?php
+										}
+									}
+									?>
+									</table>
+								
+								</td>
+							<tr>
+						</table>
+						
+
+				
+				</div>
+				
+				<div id="visao-usuarios" class="tab-content">
+				
+					<br><br><br><br>
+					Referente a cidade selecionada no filtro acima.
+					<br><br><br>
+				
+					<table border="0" width="100%">
+						<tr>
+							<td valign="top">
+								<table cellspacing="0" cellpadding="0" border="1" width="100%">
+								<tr>
+									<td colspan=8><center><b>Usuários</b></center></td>
+								</tr>
+								<tr>
+									<td><center>Cidades</center></td>
+									<td><center>Azul</center></td>
+									<td><center>Branco</center></td>
+									<td><center>Quênia</center></td>
+									<td><center>Sem Pelotão</center></td>
+									<td><center>Verde</center></td>
+									<td><center>Total</center></td>
+									<td><center>%<center></td>
+								</tr>
+								<?php
+								$i = 0;		
+								
+							
+								$count=count($this->usuariosPorCidade)-1;
+								$total=$this->usuariosPorCidade[$count]['Total'];
+								#print_r($this->usuariosPorCidade[$count]['Total']);
+								
+								if (@$this->usuariosPorCidade){
+									foreach ($this->usuariosPorCidade as $info){
+										$i++;
+								?>
+									<tr <?php if($i % 2 == 0) { echo "class='par'"; } ?>>
+										<td><input type="text" size="20" readonly="readonly" alt="<?php echo($info['Cidades']);?>" value="<?php echo($info['Cidades']); ?>"/></td>
+										<td><center><?php echo(number_format($info['Azul'], 0, ".", ".")); ?></center></td>
+										<td><center><?php echo(number_format($info['Branco'], 0, ".", ".")); ?></center></td>
+										<td><center><?php echo(number_format($info['Quênia'], 0, ".", ".")); ?></center></td>
+										<td><center><?php echo(number_format($info['Sem Pelotão'], 0, ".", ".")); ?></center></td>
+										<td><center><?php echo(number_format($info['Verde'], 0, ".", ".")); ?></center></td>
+										<td><center><?php echo(number_format($info['Total'], 0, ".", ".")); ?></center></td>
+										<td><center><?php echo round($info['Total']/$total*100, 2); ?>%</center></td>
+									</tr>
+								<?php
+									}
+								}
+								?>
+									<tr>
+										<td>Porcentagem</td>
+										<td><center><?php echo round($info['Azul']/$total*100, 2); ?>%</center></td>
+										<td><center><?php echo round($info['Branco']/$total*100, 2); ?>%</center></td>
+										<td><center><?php echo round($info['Quênia']/$total*100, 2); ?>%</center></td>
+										<td><center><?php echo round($info['Sem Pelotão']/$total*100, 2); ?>%</center></td>
+										<td><center><?php echo round($info['Verde']/$total*100, 2); ?>%</center></td>
+										<td><center><?php echo round($info['Total']/$total*100, 2); ?>%</center></td>
+										<td>&nbsp;</td>
+									</tr>
+								</table>
+							</td>
+							
+							<td valign="top"> 
+								<table cellspacing="0" cellpadding="0" border="1" width="100%">
+								<tr>
+									<td colspan=8><center><b>Usuários Balcão</b></center></td>
+								</tr>
+								<tr>
+									<td><center>Cidades</center></td>
+									<td><center>Azul</center></td>
+									<td><center>Branco</center></td>
+									<td><center>Quênia</center></td>
+									<td><center>Sem Pelotão</center></td>
+									<td><center>Verde</center></td>
+									<td><center>Total</center></td>
+									<td><center>%<center></td>
+								</tr>
+								<?php
+								$i = 0;			
+								
+								
+								$count=count($this->usuariosBalcaoPorCidade)-1;
+								$total=$this->usuariosBalcaoPorCidade[$count]['Total'];
+								#print_r($this->usuariosBalcaoPorCidade[$count]['Total']);
+								
+								if (@$this->usuariosBalcaoPorCidade){
+									foreach ($this->usuariosBalcaoPorCidade as $info){
+										$i++;
+								?>
+									<tr <?php if($i % 2 == 0) { echo "class='par'"; } ?>>
+										<td><input type="text" size="20" readonly="readonly" alt="<?php echo($info['Cidades']);?>" value="<?php echo($info['Cidades']); ?>"/></td>
+										<td><center><?php echo(number_format($info['Azul'], 0, ".", ".")); ?></center></td>
+										<td><center><?php echo(number_format($info['Branco'], 0, ".", ".")); ?></center></td>
+										<td><center><?php echo(number_format($info['Quênia'], 0, ".", ".")); ?></center></td>
+										<td><center><?php echo(number_format($info['Sem Pelotão'], 0, ".", ".")); ?></center></td>
+										<td><center><?php echo(number_format($info['Verde'], 0, ".", ".")); ?></center></td>
+										<td><center><?php echo(number_format($info['Total'], 0, ".", ".")); ?></center></td>
+										<td><center><?php echo round($info['Total']/$total*100, 2); ?>%</center></td>
+									</tr>
+								<?php
+									}
+								}
+								?>
+									<tr>
+										<td>Porcentagem</td>
+										<td><center><?php echo round($info['Azul']/$total*100, 2); ?>%</center></td>
+										<td><center><?php echo round($info['Branco']/$total*100, 2); ?>%</center></td>
+										<td><center><?php echo round($info['Quênia']/$total*100, 2); ?>%</center></td>
+										<td><center><?php echo round($info['Sem Pelotão']/$total*100, 2); ?>%</center></td>
+										<td><center><?php echo round($info['Verde']/$total*100, 2); ?>%</center></td>
+										<td><center><?php echo round($info['Total']/$total*100, 2); ?>%</center></td>
+										<td>&nbsp;</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					
+					</table>
+				
+				
+				</div>
+				
+				<div id="visao-resultados" class="tab-content">
+				
+						<br><br><br><br>
+						 Referente a base de resultados por Circuito filtrado, base por Cidade filtrada e Evento filtrado.
+						<br><br><br>
+				
+						<table border="0" width="100%">
+							<tr>
+								<td valign="top">
+								
+									<table cellspacing="0" cellpadding="0" border="1" width="100%">
+									<tr>
+										<td colspan=8><center><b>Resultados por Circuitos</b></center></td>
+									</tr>
+									<tr>
+										<td><center>Circuito</center></td>
+										<td><center>Quênia</center></td>
+										<td><center>Azul</center></td>
+										<td><center>Verde</center></td>
+										<td><center>Branco</center></td>
+										<td><center>Total</center></td>
+										<td><center>%<center></td>
+									</tr>
+									<?php
+									$i = 0;			
+									
+									$count=count($this->resultadosPorCircuito)-1;
+									$total=$this->resultadosPorCircuito[$count]['Total'];
+									#print_r($this->resultadosPorCircuito[$count]['Total']);
+									
+									if (@$this->resultadosPorCircuito){
+										foreach ($this->resultadosPorCircuito as $info){
+											$i++;
+									?>
+										<tr <?php if($i % 2 == 0) { echo "class='par'"; } ?>>
+											<td><input type="text" size="25" readonly="readonly" alt="<?php echo($info['Circuito']);?>" value="<?php echo($info['Circuito']); ?>"/></td>
+											<td><center><?php echo(number_format($info['Quênia'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo(number_format($info['Azul'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo(number_format($info['Verde'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo(number_format($info['Branco'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo(number_format($info['Total'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo round($info['Total']/$total*100, 2); ?>%</center></td>
+										</tr>
+									<?php
+										}
+									}
+									?>
+										<tr>
+											<td>Porcentagem</td>
+											<td><center><?php echo round($info['Quênia']/$total*100, 2); ?>%</center></td>
+											<td><center><?php echo round($info['Azul']/$total*100, 2); ?>%</center></td>
+											<td><center><?php echo round($info['Verde']/$total*100, 2); ?>%</center></td>
+											<td><center><?php echo round($info['Branco']/$total*100, 2); ?>%</center></td>
+											<td><center><?php echo round($info['Total']/$total*100, 2); ?>%</center></td>
+											<td>&nbsp;</td>
+										</tr>
+									</table>
+									
+									<br><br>
+									
+									<table cellspacing="0" cellpadding="0" border="1" width="100%">
+									<tr>
+										<td colspan=8><center><b>Resultados por Cidade</b></center></td>
+									</tr>
+									<tr>
+										<td><center>Cidades</center></td>
+										<td><center>Branco</center></td>
+										<td><center>Verde</center></td>
+										<td><center>Azul</center></td>
+										<td><center>Quênia</center></td>
+										<td><center>Total</center></td>
+										<td><center>%<center></td>
+									</tr>
+									<?php
+									$i = 0;			
+									
+									$count=count($this->resultadosPorCidade)-1;
+									$total=$this->resultadosPorCidade[$count]['Total'];
+									#print_r($this->resultadosPorCidade[$count]['Total']);
+									
+									if (@$this->resultadosPorCidade){
+										foreach ($this->resultadosPorCidade as $info){
+											$i++;
+									?>
+										<tr <?php if($i % 2 == 0) { echo "class='par'"; } ?>>
+											<td><input type="text" size="25" readonly="readonly" alt="<?php echo($info['Cidades']);?>" value="<?php echo($info['Cidades']); ?>"/></td>
+											<td><center><?php echo(number_format($info['Branco'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo(number_format($info['Verde'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo(number_format($info['Azul'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo(number_format($info['Quênia'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo(number_format($info['Total'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo round($info['Total']/$total*100, 2); ?>%</center></td>
+										</tr>
+									<?php
+										}
+									}
+									?>
+										<tr>
+											<td>Porcentagem</td>
+											<td><center><?php echo round($info['Branco']/$total*100, 2); ?>%</center></td>
+											<td><center><?php echo round($info['Verde']/$total*100, 2); ?>%</center></td>
+											<td><center><?php echo round($info['Azul']/$total*100, 2); ?>%</center></td>
+											<td><center><?php echo round($info['Quênia']/$total*100, 2); ?>%</center></td>
+											<td><center><?php echo round($info['Total']/$total*100, 2); ?>%</center></td>
+											<td>&nbsp;</td>
+										</tr>
+									</table>
+									
+									
+									
+								</td>
+								
+								<td valign="top">
+								
+	
+									<table cellspacing="0" cellpadding="0" border="1" width="100%">
+									<tr>
+										<td colspan=7><center><b>Resultados por Eventos</b></center></td>
+									</tr>
+									<tr>
+										<td><center>Eventos</center></td>
+										<td><center>Branco</center></td>
+										<td><center>Azul</center></td>
+										<td><center>Verde</center></td>
+										<td><center>Quênia</center></td>
+										<td><center>Total</center></td>
+										<td><center>%<center></td>
+									</tr>
+									<?php
+									$i = 0;			
+									
+									$count=count($this->resultadosPorEvento)-1;
+									$total=$this->resultadosPorEvento[$count]['Total'];
+									#print_r($this->resultadosPorEvento[$count]['Total']);
+									
+									if (@$this->resultadosPorEvento){
+										foreach ($this->resultadosPorEvento as $info){
+											$i++;
+									?>
+										<tr <?php if($i % 2 == 0) { echo "class='par'"; } ?>>
+											<td><input type="text" size="25" readonly="readonly" alt="<?php echo($info['Eventos']);?>" value="<?php echo($info['Eventos']);?>"/></td>
+											<td><center><?php echo(number_format($info['Branco'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo(number_format($info['Azul'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo(number_format($info['Verde'], 0, ".", ".")); ?></center></td>					
+											<td><center><?php echo(number_format($info['Quênia'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo(number_format($info['Total'], 0, ".", ".")); ?></center></td>
+											<td><center><?php echo round($info['Total']/$total*100, 2); ?>%</center></td>
+										</tr>
+									<?php
+										}
+									}
+									?>
+										<tr>
+											<td>Porcentagem</td>
+											<td><center><?php echo round($info['Branco']/$total*100, 2); ?>%</center></td>
+											<td><center><?php echo round($info['Azul']/$total*100, 2); ?>%</center></td>
+											<td><center><?php echo round($info['Verde']/$total*100, 2); ?>%</center></td>
+											<td><center><?php echo round($info['Quênia']/$total*100, 2); ?>%</center></td>
+											<td><center><?php echo round($info['Total']/$total*100, 2); ?>%</center></td>
+											<td>&nbsp;</td>
+										</tr>
+									</table>
+								
+								</td>
+							<tr>
+						</table>
+				
+				
+				
+					
+					
+				</div>
+
+			</div><!-- container -->
+			
+			
+			
+	
+			
+
+			
+			
+			
+            
+
+
+<style>
+input{
+	margin-left:0 !important;
+}
+#fpesquisa input[type="text"]#dt_pedido_ini, #fpesquisa input[type="text"]#dt_pedido_fim {
+	width: 100px !important;
+}
+.linhas{
+	border-left:1px solid #999;
+	border-right:1px solid #999;
+}
+.linhas:nth-child(even){
+	background:#F2F2F2;
+}
+.linhas{
+	float:left;
+	height:30px;
+	padding:10px 0;
+}
+.linhas td{
+	padding:5px;
+	float:left;
+	font-size:12px;
+	color:#333;
+	width:30%;
+}
+.linhas td:first-child{
+	border:none;
+}
+.linhas {
+	
+}
+.linhas .td1{
+	font-weight:bold;
+	font-size:13px;
+}
+.linhas .td2{
+	font-weight:bold;
+	font-size:13px;
+	width:35%;
+}
+.linhas .titulo2{
+	font-weight:bold;
+	font-size:13px;
+}
+.linhas .valor2{
+	font-weight:bold;
+}
+.linhas .tdProtocolo{
+	width:870px !important;
+}
+.linhas select{
+	margin:0 !important;
+	width:200px;
+}
+.linhas input{
+	text-indent:10px;
+}
+.linhas .dt_pedido{
+	width:385px;
+}
+.linhas .checkbox{
+	width:60px;
+}
+#lista-usuarios-interna {
+	padding: 20px 20px 40px 20px !important;
+}
+input[type="radio"] {
+	margin:0px 8px !important;
+}
+</style>
+
+<style>
+.container{
+width: 100%;
+margin: 0 auto;
+}
+
+
+
+ul.tabs{
+margin: 0px;
+padding: 0px;
+list-style: none;
+}
+ul.tabs li{
+background: #CCCCCC;
+color: #222;
+display: inline-block;
+padding: 10px 15px;
+cursor: pointer;
+}
+
+ul.tabs li.current{
+background: #FFFFFF;
+color: #222;
+}
+
+.tab-content{
+display: none;
+background: #FFFFFF;
+padding: 5px;
+}
+
+.tab-content.current{
+display: inherit;
+}
+</style>

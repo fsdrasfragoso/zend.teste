@@ -1,0 +1,316 @@
+
+	<!--HEADER-->
+		<header>
+			<div class="ccenter">
+
+				<!--PUBLICIDADE-->
+				<div class="pub1">
+                                    <a href="#"><img src="<?=$this->BaseUrl()?>/img/homesite/img-temporary/puma.jpg" width="729" height="90" alt="Puma" title="Puma" /></a>
+				</div>
+				<!--FINAL PUBLICIDADE-->
+				<!--AREA OPÇÕES-->				
+                                <div class="areaOptions">
+					<a href="<?=$this->BaseUrl()?>/index" title="O2 por minuto" class="logo">O2 por minuto - corrida, estilo de vida</a>
+                                        <div class="left" id="busca_index">
+                                            <form id="formValida" method="POST" action="<?=$this->BaseUrl()?>/busca/index">
+						<fieldset class="search">
+							<input type="text" value="Procurar..."  onblur="if(this.value == '') {this.value = 'Procurar...';}" onfocus="if(this.value == 'Procurar...') {this.value = '';}" name="consulta"  id="consulta" />
+							<input type="submit" value="" />
+						</fieldset>
+                                            </form>
+                                        </div>
+                                        <div class="left" id="revista_index">
+                                            <a href="<?=$this->BaseUrl()?>/revista/index/id_edicao_revista/2"><img src="http://superativo.approval.adm.br/admin/public/upload/revista/revista_2_73648f268d30747d05b58a69fc5aff6a.jpg" alt="" width="127" height="166" /></a>
+                                            <div class="ml10">
+                                            <a href="<?=$this->BaseUrl()?>/revista/index/id_edicao_revista/2">Revista 02</a>
+                                            <a href="http://www.assineesfera.com.br/" class="btn_laranja" target="_blank">Assine já!</a>
+                                            </div>
+                                        </div>
+				</div>
+				<!--FINAL AREA OPÇÕES-->
+
+			</div>
+		</header>
+	<!--FINAL HEADER-->
+        <div class="contentPublic">
+	<!--NAV-->
+
+        <div id="banner_float">
+            <a href="#"><img src="<?=$this->BaseUrl()?>/img/homesite/img-temporary/banner-flutuante.jpg" /></a>
+        </div>
+        <div class="menu sel_home">		
+            <nav>
+                <ul id="menu" class="sf-menu">
+                                <li><a href="http://o2.approval.adm.br/public/noticias/noticias" class="m_item"  title="notícias" id="menu_noticias">notícias</a>
+                                        </li>
+
+
+                                <li><a href="http://o2.approval.adm.br/public/noticias/corrida-de-rua" class="m_item"  title="corrida de rua" id="menu_corrida_de_rua">corrida de rua</a>
+                                                                        </li>
+
+
+                                <li><a href="http://o2.approval.adm.br/public/noticias/treinamento" class="m_item"  title="treinamento" id="menu_treinamento">treinamento</a>
+                                                                        </li>
+
+
+                                <li><a href="http://o2.approval.adm.br/public/planilhas" class="m_item"  title="planilhas" id="menu_planilhas">planilhas</a>
+                                                                                        <div class="dropdown_2columns">
+                                        <div class="bg">
+                                                <div class="col_1">
+                                                                                                                                                <h3><a href="http://o2.approval.adm.br/public/planilhas" title="Monte a sua planilha " id="menu_monte_a_sua_planilha_">Monte a sua planilha </a></h3>
+                                                                                                                                                                                                                                                <h3><a href="http://o2.approval.adm.br/public/noticias/planilhas-de-treino" title="Planilhas de treino O2" id="menu_planilhas_de_treino_o2">Planilhas de treino O2</a></h3>
+                                                                                                                                                                                                                                        </div>
+                                        </div>
+                                </div>
+                                                                        </li>
+
+
+                                <li><a href="http://o2.approval.adm.br/public/noticias/iniciantes" class="m_item"  title="iniciantes" id="menu_iniciantes">iniciantes</a>
+                                                                                        <div class="dropdown_2columns">
+                                        <div class="bg">
+                                                <div class="col_1">
+                                                                                                                                                <h3><a href="http://o2.approval.adm.br/public/noticias/dicas" title="Dicas" id="menu_dicas">Dicas</a></h3>
+                                                                                                                                                                                                                                                <h3><a href="http://o2.approval.adm.br/public/noticias/perda-de-peso" title="Perda de peso" id="menu_perda_de_peso">Perda de peso</a></h3>
+                                                                                                                                                                                                                                                <h3><a href="http://www.botapracorrer.com.br/" title="Bota pra correr" id="menu_bota_pra_correr">Bota pra correr</a></h3>
+                                                                                                                                                                                                                                        </div>
+                                        </div>
+                                </div>
+                                                                        </li>
+
+
+                                <li><a href="http://o2.approval.adm.br/public/noticias/nutricao" class="m_item"  title="nutrição" id="menu_nutricao">nutrição</a>
+                                                                        </li>
+
+
+                                <li><a href="http://o2.approval.adm.br/public/noticias/saude" class="m_item"  title="saúde" id="menu_saude">saúde</a>
+                                                                        </li>
+
+
+                                <li><a href="http://o2.approval.adm.br/public/noticias/o2-mulher" class="m_item"  title="o2 Mulher" id="menu_o2_mulher">o2 Mulher</a>
+                                                                        </li>
+
+
+
+                </ul>					
+            </nav>
+        <!--FINAL NAV-->
+	</div>	
+       <div class="tabsgenericas ui-tabs ui-widget ui-widget-content ui-corner-all" id="tabsprincipal">
+		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header">
+			<li id="tabs-calendario" class="ui-state-default"><a href="#calendario">calendário</a></li>
+			<li id="tabs-inscricoes" class="ui-state-default"><a class="redirect" href="http://superativo.approval.adm.br/front/public/#inscricoes">inscrições</a></li>
+			<li id="tabs-resultados" class="ui-state-default"><a class="redirect" href="http://superativo.approval.adm.br/front/public/#resultados">resultados</a></li>
+			<li id="tabs-fotos" class="ui-state-default"><a class="redirect" href="http://superativo.approval.adm.br/front/public/fotos">fotos</a></li>
+			<li id="tabs-videos_oxigenio" class="ui-state-default"><a href="#videos_oxigenio">vídeos oxigênio tv</a></li>
+			<li id="tabs-guia-do-tenis" class="ui-state-default"><a class="redirect_self" href="<?=$this->BaseUrl()?>/guiadotenis">guia do tênis</a></li>
+			<li id="tabs-ferramentas" class="ui-state-default"><a href="#ferramentas">ferramentas</a></li>
+		</ul>
+
+
+		<div id="calendario" class="ui-tabs-panel ui-widget-content">
+			<fieldset class="left">
+				<select name="cidade" id="cidade" class="custom" onChange="alertselected(this)">
+    <option value="" label="Cidades">Cidades</option>
+    <option value="59180" label="Conchas">Conchas</option>
+    <option value="54990" label="Florianópolis">Florianópolis</option>
+    <option value="52260" label="Pelotas">Pelotas</option>
+    <option value="46570" label="Rio de Janeiro">Rio de Janeiro</option>
+    <option value="63240" label="Santos">Santos</option>
+    <option value="63390" label="São José dos Campos">São José dos Campos</option>
+    <option value="63440" label="São Paulo">São Paulo</option>
+</select>				<img src="<?=$this->BaseUrl()?>/img/homesite/loading.gif" style="margin-left: 10px; display: none; float: right;" id="loading"/>
+			</fieldset>
+			<div class="left" id="calendario_table">
+				<table>
+										<tr>
+						<td class="td1 tdcenter"><span>31/05</span></td>
+						<td class="td4">Evento YeahDigital 0</td>
+						<td class="td3">
+							<a href="http://superativo.approval.adm.br/front/public/eventos/#evento_yeahdigital_07-05-2013_-_12-25" target="_blank" class="btn_verde">inscreva-se</a>						</td>
+					</tr>
+										<tr>
+						<td class="td1 tdcenter"><span>31/12</span></td>
+						<td class="td4">Night Run 123</td>
+						<td class="td3">
+							<a href="http://superativo.approval.adm.br/front/public/eventos/#night_run_123" target="_blank" class="btn_verde">inscreva-se</a>						</td>
+					</tr>
+										<tr>
+						<td class="td1 tdcenter"><span>16/05</span></td>
+						<td class="td4">Maratona de São Pau</td>
+						<td class="td3">
+							<a href="http://superativo.approval.adm.br/front/public/eventos/#maratona_de_sao_paulo" target="_blank" class="btn_verde">inscreva-se</a>						</td>
+					</tr>
+										<tr>
+						<td class="td1 tdcenter"><span>30/04</span></td>
+						<td class="td4">Evento Terceiro</td>
+						<td class="td3">
+							<a href="http://superativo.approval.adm.br/front/public/eventos/#evento_terceiro" target="_blank" class="btn_verde">inscreva-se</a>						</td>
+					</tr>
+										<tr>
+						<td class="td1 tdcenter"><span>04/07</span></td>
+						<td class="td4">2ª TratorRace - Cor</td>
+						<td class="td3">
+							<a href="http://superativo.approval.adm.br/front/public/eventos/#2a_tratorrace_-_corrida_&_caminhada" target="_blank" class="btn_verde">inscreva-se</a>						</td>
+					</tr>
+									</table>
+				<a href="http://superativo.approval.adm.br/front/public/eventos/#listaEventos" class="btn_laranja" target="_blank">Ver mais</a>
+			</div>
+		</div>
+
+		<div id="videos_oxigenio" class="hide coluna_noticias">
+
+			
+				<article>
+					<h2><a href="<?=$this->BaseUrl()?>/galeria/videos/encontro-nacional">Encontro Nacional</a></h2>
+					<div class="overlay_play">
+						<a href="<?=$this->BaseUrl()?>/galeria/videos/encontro-nacional"><img src="<?=$this->BaseUrl()?>/img/homesite/ico/play_hover.png" /></a>
+					</div>
+					<a href="<?=$this->BaseUrl()?>/galeria/videos/encontro-nacional"><img src="http://thumb.mais.uol.com.br/13333139
+-medium.jpg" alt="Encontro Nacional" width="188" height="128" /></a>
+
+					<a href="<?=$this->BaseUrl()?>/galeria/videos/encontro-nacional"><span>Grande evento</span></a>
+				</article>
+			
+				<article>
+					<h2><a href="<?=$this->BaseUrl()?>/galeria/videos/vdeo-night-run">Vídeo Night Run</a></h2>
+					<div class="overlay_play">
+						<a href="<?=$this->BaseUrl()?>/galeria/videos/vdeo-night-run"><img src="<?=$this->BaseUrl()?>/img/homesite/ico/play_hover.png" /></a>
+					</div>
+					<a href="<?=$this->BaseUrl()?>/galeria/videos/vdeo-night-run"><img src="http://img.youtube.com/vi/0NUbGZ2tuoM/0.jpg" alt="Vídeo Night Run" width="188" height="128" /></a>
+
+					<a href="<?=$this->BaseUrl()?>/galeria/videos/vdeo-night-run"><span>Noite incrível no Rio</span></a>
+				</article>
+			
+				<article>
+					<h2><a href="<?=$this->BaseUrl()?>/galeria/videos/10-erros-cometidos-pelos-iniciantes-4">Calorias diarias</a></h2>
+					<div class="overlay_play">
+						<a href="<?=$this->BaseUrl()?>/galeria/videos/10-erros-cometidos-pelos-iniciantes-4"><img src="<?=$this->BaseUrl()?>/img/homesite/ico/play_hover.png" /></a>
+					</div>
+					<a href="<?=$this->BaseUrl()?>/galeria/videos/10-erros-cometidos-pelos-iniciantes-4"><img src="http://thumb.mais.uol.com.br/13333139-medium.jpg" alt="Calorias diarias" width="188" height="128" /></a>
+
+					<a href="<?=$this->BaseUrl()?>/galeria/videos/10-erros-cometidos-pelos-iniciantes-4"><span>calcular os caloreias</span></a>
+				</article>
+			
+				<article>
+					<h2><a href="<?=$this->BaseUrl()?>/galeria/videos/10-erros-cometidos-pelos-iniciantes-3">Os iniciantes</a></h2>
+					<div class="overlay_play">
+						<a href="<?=$this->BaseUrl()?>/galeria/videos/10-erros-cometidos-pelos-iniciantes-3"><img src="<?=$this->BaseUrl()?>/img/homesite/ico/play_hover.png" /></a>
+					</div>
+					<a href="<?=$this->BaseUrl()?>/galeria/videos/10-erros-cometidos-pelos-iniciantes-3"><img src="http://img.youtube.com/vi/0NUbGZ2tuoM/0.jpg" alt="Os iniciantes" width="188" height="128" /></a>
+
+					<a href="<?=$this->BaseUrl()?>/galeria/videos/10-erros-cometidos-pelos-iniciantes-3"><span>10 erros</span></a>
+				</article>
+					</div>
+
+		<div id="guia_tenis" class="hide">
+			<h2>Guia do tênis</h2>
+		</div>
+
+		<div id="ferramentas" class="hide">
+			<div class="tabsvertical">
+				<ul>
+					<li><a href="#massacorporaltab">massa corporal</a></li>
+					<li><a href="#temporuntab">tempo run</a></li>
+					<li><a href="#caloriastab">calcular calorias</a></li>
+					<li><a href="#pulseiratab">pulseira de ritmo</a></li>
+				</ul>
+
+				<div id="massacorporaltab">
+					<div class="left td2 tdcenter">O índice de massa corporal (IMC) é uma medida de grau de obesidade de uma pessoa por meio de cálculo</div>
+					<div class="left td25"><img src="<?=$this->BaseUrl()?>/img/homesite/ico/massa-corporal.jpg" alt="" width="163" height="104" /></div>
+
+					<div class="left td3 noborder">
+						<form id="massatab">
+							<p>Calculadora de IMC</p>
+							<fieldset>
+								<input type="text" name="alturatab" id="massa_alturatab" class="custom" placeholder="altura" />
+								<input type="text" name="pesotab" id="massa_pesotab" class="custom" placeholder="peso" />
+							</fieldset>
+							<input type="submit" class="btn_laranja" value="resultado">
+
+						</form>
+					</div>
+				</div>
+
+				<div id="temporuntab">
+					<div class="left td2 tdcenter">A calculadora Tempo Run projeta o tempo para uma distância almejada, baseando-se no seu desempenho atual em outra distância.</div>
+					<div class="left td25"><img src="<?=$this->BaseUrl()?>/img/homesite/ico/statistics.png" alt="" width="111" height="60" /></div>
+					<div class="left td3 noborder">
+						<form id="tempo_formtab">
+							<p>Tempo Run</p>
+							<fieldset>
+								<input type="text" name="distancia_percorridatab" id="distancia_percorridatab" class="custom" placeholder="Distância Percorrida" />
+								<input type="text" name="d_tempotab" id="d_tempotab" class="custom" placeholder="Tempo" />
+								<input type="text" name="d_planejadatab" id="d_planejadatab" class="custom" placeholder="Distância Planejada" />
+							</fieldset>
+							<input type="submit" class="btn_laranja" value="resultado">
+
+						</form>
+					</div>
+				</div>
+
+				<div id="caloriastab">
+
+					<div class="left td2 tdcenter">A calculadora de calorias indica quantas calorias você perde ao correr uma determinada distância.</div>
+					<div class="left td25"><img src="<?=$this->BaseUrl()?>/img/homesite/ico/banana.jpg" alt="" width="155" height="95" /></div>
+					<div class="left td3 noborder">
+						<form id="calorias_formtab">
+							<p>Calculadora de calorias</p>
+							<fieldset>
+								<input type="text" name="distancia_ptab" id="distancia_ptab" class="custom" placeholder="distância percorrida" />
+								<input type="text" name="peso1tab" id="peso1tab" class="custom" placeholder="peso" />
+							</fieldset>
+							<input type="submit" class="btn_laranja" value="resultado">
+						</form>
+					</div>
+				</div>
+				<div id="pulseiratab">
+					<div class="left td2 tdcenter">Alcance sua meta nas provas e treinos! A pulseira é a ferramenta ideal para monitorar seu ritmo, km a km, em qualquer distância.</div>
+
+					<div class="left td25"><img src="<?=$this->BaseUrl()?>/img/homesite/ico/pulseira-ritmo.png" alt="" width="155" height="73" /></div>
+					<div class="left td3 noborder">
+						<form id="pulseira_formtab">
+							<p>Pulseira de Ritmo</p>
+							<fieldset>
+								<input type="text" name="distancia1tab" id="distancia1tab" class="custom" placeholder="distância" />
+								<input type="text" name="tempo1tab" id="tempo1tab" class="custom" placeholder="tempo" />
+							</fieldset>
+							<input type="submit" class="btn_laranja" value="resultado">
+						</form>
+					</div>
+				</div>
+
+
+			</div><!--fim tabs vertical-->
+		</div><!--fim ferramentas-->
+	</div><!--tabs-->
+</div><!--fim contentpublic-->
+<script language="JavaScript">
+
+        function alertselected(selectobj){
+            valor = selectobj.value;
+
+             $("#loading").show();
+            var url_action = "<?=$this->BaseUrl()?>/index/acao";
+            $.ajax({
+                url: url_action,
+                type: "POST",
+                data: {cidade: valor},
+
+                success: function(data){
+                    $("#loading").hide();
+                    if (data == ""){
+                        $("#calendario_table").html("Não foram encontrados resultados.");
+                    }else{
+                        $("#calendario_table").html(data);
+                    }
+
+
+
+                }
+            });
+
+
+           }
+
+    </script>

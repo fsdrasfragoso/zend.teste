@@ -1,0 +1,85 @@
+<script>
+$(window).load(function(){
+	$("form").append('<input type="hidden" name="pg_atual" class="pg_atual" value="<?=$this->pg_atual?>" /><input type="hidden" name="num_pgs" class="num_pgs" value="<?=$this->num_pgs?>" />');
+	$(".ir").on('click',function(){
+		var ir = $(this).attr('rel');
+		$(".pg_atual").val(ir);
+		$("form").submit();
+	});
+	$("#count").change(function(){
+		var ir = $(this).find("option:selected").val();
+		$(".num_pgs").val(ir);
+		$("form").submit();
+	});
+	$("#bt_pesquisa").click(function(){
+		$(".num_pgs").val("");
+		$(".pg_atual").val("");
+	});
+});
+</script>
+<table align="right" style="background: url('<?=$this->BaseUrl();?>/img/background.png') repeat-x; height:27px; width: 388px;">
+	<tr>
+		<td>
+	        <?=$this->formSelect("count", $this->num_pgs, array(), array("10" => "10", "20"=> "20", "30" => "30", "40" => "40", "50" => "50")); ?>
+        </td>
+        <td><img src="<?=$this->BaseUrl();?>/img/separador.png" /></td>
+        <?php if($this->pg_atual > 1) {?>
+            <td><a href="javascript:void(0);" class="ir" rel="1"><img src="/img/voltar_tudo.png"></a></td>
+            <td><a href="javascript:void(0);" class="ir" rel="<?=$this->pg_atual-1?>"><img src="/img/voltar.png"></a></td>
+        <?php }?>
+            <td><img src="/img/separador.png"></td>
+            <td><?=$this->pg_atual?> de <?=$this->total_paginas?></td>
+            <td><img src="/img/separador.png"></td>
+        <?php if($this->pg_atual < $this->total_paginas) {?>
+	        <td><a href="javascript:void(0);" class="ir" rel="<?=$this->pg_atual+1?>"><img src="/img/avancar.png"></a></td>
+            <td><a href="javascript:void(0);" class="ir" rel="<?=$this->total_paginas?>"><img src="/img/avancar_tudo.png"></a></td>
+        <?php }?>
+    </tr>
+</table>
+
+<!--<script language="javascript">
+	function doPaginacao(url)
+	{
+		count = $("#count").val();
+		window.location = url+'&num_pgs='+count;
+	}
+
+	$(document).ready(function(){
+		$("#paginacao_<?=$this->pg_atual;?>").css("color", "white");
+		$("#paginacao_<?=$this->pg_atual;?>").css("background", "#666");
+	});
+
+</script>
+<style>
+    #count {width:56px;}
+</style>
+
+<?php
+
+$url = $this->BaseUrl()."/".$_SERVER['REQUEST_URI'];
+
+?>
+
+<table align="right" style="background: url('<?=$this->BaseUrl();?>/img/background.png') repeat-x; height:27px; width: 388px;">
+	<tr>
+		<td><?php
+//		$url = $this->BaseUrl()."/".$this->controllerName."/".$this->actionName."/id_menu/".$this->id_menu.$this->more;
+
+		echo $this->formSelect("count", $this->num_pgs, array("onChange" => "doPaginacao('".$url."')"), array("10" => "10", "20"=> "20", "30" => "30", "40" => "40", "50" => "50"));
+  		?></td>
+  		<td><img src="<?=$this->BaseUrl();?>/img/separador.png" /></td>
+
+        <?php if($this->pg_atual > 1) {?>
+            <td><a href="<?=$url.'&num_pag='.$this->num_pgs.'&pg_atual=1'?>"><img src="/img/voltar_tudo.png"></a></td>
+            <td><a href="<?=$url.'&num_pag='.$this->num_pgs.'&pg_atual='.($this->pg_atual-1)?>"><img src="/img/voltar.png"></a></td>
+            <?php }?>
+            <td><img src="/img/separador.png"></td>
+            <td><?=$this->pg_atual?> de <?=$this->total_paginas?></td>
+            <td><img src="/img/separador.png"></td>
+            <?php if($this->pg_atual < $this->total_paginas) {?>
+            <td><a href="/<?=$url.'&num_pag='.$this->num_pgs.'&pg_atual='.($this->pg_atual+1)?>"><img src="/img/avancar.png"></a></td>
+            <td><a href="/<?=$url.'&num_pag='.$this->num_pgs.'&pg_atual='.$this->total_paginas?>"><img src="/img/avancar_tudo.png"></a></td>
+         <?php }?>
+	</tr>
+</table>
+-->

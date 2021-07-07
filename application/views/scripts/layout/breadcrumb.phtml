@@ -1,0 +1,14 @@
+<?php
+    $menuModel = new MenuModel();
+    $menu = $menuModel->getMenu($this->id_menu);
+    if ($menu['id_menu_pai']>0) $menuPai = $menuModel->getMenuPai($menu['id_menu_pai']);
+?>
+<?php
+    if ($menu['id_menu_pai']>0) {
+?>
+        <ol class="breadcrumb">
+            <li><a href="#"><b><?=$this->setTranslation('Início',$this->BaseUrl())?></b></a></li>
+            <li><i class="fa fa-angle-right"></i><a href="#"><b><?=$this->setTranslation($menuPai['ds_menu'],$this->BaseUrl())?></b></a></li>
+            <li class="active"><i class="fa fa-angle-right"></i><b><?=$this->setTranslation($menu['ds_menu'],$this->BaseUrl())?></b></li>
+        </ol>
+<?php }?>

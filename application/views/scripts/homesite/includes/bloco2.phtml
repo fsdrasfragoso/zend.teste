@@ -1,0 +1,20 @@
+<?php
+
+$urlNoticia = $this->BaseUrl().'/upload/noticia/';
+
+?>
+
+                                    <div class="noticia_grande portlet" id="bloco2">
+                                        <div class="edicao_barra">
+                                            <?=$this->formSelect("id_situacao_cadastro6",$this->posicao[5]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(6);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                                        </div>
+                                <?php
+                                        foreach ($this->dadosb2 as $resultado): ?>
+
+                                                        <a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>"><img src="<?=$urlNoticia.$resultado['ds_url_imagem']?>" width="323" height="197" /></a>
+                                                        <h2><a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>"><?=$resultado["ds_titulo"]?></a></h2>
+                                                        <p><a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>"><?=$resultado["ds_subtitulo"]?></a></p>
+                                            <?php
+                                        endforeach;
+                                ?>
+                                    </div>

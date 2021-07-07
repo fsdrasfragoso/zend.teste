@@ -1,0 +1,56 @@
+<pre>
+<?php
+
+//print_r($this->data);
+?>
+</pre>
+      <div class="barra-tarefas">
+        <ul>
+          <li><a href="<?=$this->url(array('controller' => 'menu', 'action' => 'novo', 'id_menu_pai' => 0)); ?>">Novo Menu</a></li>
+        </ul>
+        
+        <div class="lista-usuarios">
+        <table width="100%" border="0" class="teste">
+          <tr>
+          	<td></td>
+          	<td></td>
+            <td width="100">
+            ID
+            </td>
+            <td width="900">
+              <span>Ordem</span>
+            </td>
+            <td width="100">Menu</td>
+            <td width="100">Itens</td>
+          </tr>          
+          	<?php foreach($this->data as $data): ?>
+      		<tr>
+	            <td width="20">
+	              <a href="<?=$this->url(array('controller' => 'menu', 'action' => 'edit', 'id' => $data['id_menu'])); ?>" class="tooltip">
+	                <img src="<?=$this->BaseUrl();?>/img/editar.png" />
+	                <div>
+	                  Editar
+	                </div>
+	              </a>
+	            </td>
+	            <td width="20">
+	              <a href="<?=$this->url(array('controller' => 'menu', 'action' => 'delete', 'id' => $data['id_menu'])); ?>" onclick="return confirm('Tem certeza que gostaria de excluir a menu?')" class="tooltip">
+	                <img src="<?=$this->BaseUrl();?>/img/arrow-up.png" />
+	                <div>
+	                  Excluir
+	                </div>
+	              </a>
+	            </td>
+	          	<td><?=$data['id_menu']?> </td>
+	          	<td><?=$data['nr_ordem']?></td>
+	          	<td><?=$data['ds_menu']?></td>
+	          	<td><a href="<?=$this->url(array('controller' => 'itemmenu', 'action' => 'index', 'id_menu_pai' => $data['id_menu'])); ?>">[Itens]</a></td>
+	          	
+  			</tr>
+          	<?php endforeach; ?>
+          
+        </table>
+      </div>
+      
+    </div>
+  

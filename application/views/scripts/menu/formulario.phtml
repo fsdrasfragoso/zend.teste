@@ -1,0 +1,25 @@
+<?php
+$label_submit = "Cadastrar";
+if($this->acao == "edit")
+	$label_submit = "Salvar";
+?>
+  <div class="barra-tarefas">
+    <div id="cadstro">
+      <div class="form">
+      <form action="<?=$this->url(array('controller' => 'menu', 'action' => 'save')); ?>" method="post">
+      <input type="hidden" name="id_menu" value="<?=$this->data['id_menu']?>" />
+      <input type="hidden" name="id_menu_pai" value="<?=$this->id_menu_pai?>" />
+      <fieldset>
+        <label>
+          <span>Menu:</span><?=$this->formText("ds_menu", $this->data['ds_menu']);?>
+        </label>
+        <label>
+          <span>Ordem:</span><?=$this->formText("nr_ordem", $this->data['nr_ordem']);?>
+        </label>
+        <input type="submit" class="resultado" value="<?=$label_submit;?>" />
+        <a href="<?=$this->url(array('controller' => 'menu', 'action' => 'index')); ?>" class="back">Voltar</a>
+        </fieldset>
+      </form>
+      </div>
+    </div>
+  </div>

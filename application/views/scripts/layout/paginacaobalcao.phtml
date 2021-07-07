@@ -1,0 +1,46 @@
+<script language="javascript">
+	function doPaginacao(url)
+	{
+		count = $("#count").val();
+		window.location = url+'/num_pgs/'+count;
+	}
+	
+	$(document).ready(function(){
+		$("#paginacao_<?=$this->pg_atual;?>").css("color", "white");
+		$("#paginacao_<?=$this->pg_atual;?>").css("background", "#666");
+	});
+	
+</script>
+<style>
+    #count {width:56px;}
+</style>
+<style type="text/css">
+.pagSelect select, .pagInput input{
+border:none; background:none; color:#FFF; margin-right:2px; font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;}
+</style>
+<table style="background:#53575a !important; height:27px; width: 388px; color:#FFF !important; margin-top: 0px; margin-bottom: -2px;">
+	<tr>
+    	<td width="30">&nbsp;</td>
+		<td class="pagSelect"><?php 
+		$url = $this->BaseUrl()."/index.php/".$this->controllerName."/".$this->actionName."/id_menu/".$this->id_menu.$this->more;
+                
+                /*$procura10 = strpos($_SERVER['REQUEST_URI'], "num_pgs/10");
+                $procura20 = strpos($_SERVER['REQUEST_URI'], "num_pgs/20");
+                $procura30 = strpos($_SERVER['REQUEST_URI'], "num_pgs/30");
+                $procura40 = strpos($_SERVER['REQUEST_URI'], "num_pgs/40");
+                $procura50 = strpos($_SERVER['REQUEST_URI'], "num_pgs/50");                
+                $url = $this->BaseUrl().$_SERVER['REQUEST_URI'];
+                 */
+                
+		echo $this->formSelect("count", $this->num_pgs, array("onChange" => "doPaginacao('".$url."')"), array("10" => "10", "20"=> "20", "30" => "30", "40" => "40", "50" => "50")); 
+  		?></td>
+  		<td><img src="<?=$this->BaseUrl();?>/img/separador.png"  style="display:none;"/></td>
+  		<td><a href="<?=$this->url(array('controller' => $this->controllerName, 'action' => $this->actionName, 'pg_atual' => '1', 'num_pgs' => $this->num_pgs, 'p1'=>$this->p1, 'p2'=>$this->p2, 'p3'=>$this->p3, 'p4'=>$this->p4, 'p5'=>$this->p5));?>"><img src="<?=$this->BaseUrl();?>/img/icoVoltar_tudo.png" /></a></td>
+  		<td><a href="<?=$this->url(array('controller' => $this->controllerName, 'action' => $this->actionName, 'pg_atual' => max(array(($this->pg_atual-1), 1)), 'num_pgs' => $this->num_pgs, 'p1'=>$this->p1, 'p2'=>$this->p2, 'p3'=>$this->p3, 'p4'=>$this->p4, 'p5'=>$this->p5));?>"><img src="<?=$this->BaseUrl();?>/img/icoVoltar.png" /></a></td>
+  		<td><img src="<?=$this->BaseUrl();?>/img/separador.png" style="display:none;" /></td>
+  		<td style="width:160px" class="pagInput">Página <input name="pg_atual" value="<?php echo $this->pg_atual; ?>" style="width: 53px; text-align:right;">de <?=$this->total_paginas;?></td>
+  		<td><img src="<?=$this->BaseUrl();?>/img/separador.png" style="display:none;" /></td>
+  		<td><a href="<?=$this->url(array('controller' => $this->controllerName, 'action' => $this->actionName, 'pg_atual' => min(array(($this->pg_atual+1), $this->total_paginas)), 'num_pgs' => $this->num_pgs, 'p1'=>$this->p1, 'p2'=>$this->p2, 'p3'=>$this->p3, 'p4'=>$this->p4, 'p5'=>$this->p5));?>"><img src="<?=$this->BaseUrl();?>/img/icoAvancar.png" /></a></td>
+  		<td><a href="<?=$this->url(array('controller' => $this->controllerName, 'action' => $this->actionName, 'pg_atual' => $this->total_paginas, 'num_pgs' => $this->num_pgs, 'p1'=>$this->p1, 'p2'=>$this->p2, 'p3'=>$this->p3, 'p4'=>$this->p4, 'p5'=>$this->p5));?>"><img src="<?=$this->BaseUrl();?>/img/icoAvancar_tudo.png" /></a></td>
+	</tr>	
+</table>

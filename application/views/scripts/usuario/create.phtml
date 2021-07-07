@@ -1,0 +1,74 @@
+<div class="card border">
+    <div class="card-body">
+        <form name="formUsuario" id="formUsuario" method="POST" enctype="multipart/form-data">
+            
+            <div class="form-group">
+                <label for="label_name">Nome</label>
+                <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Sobrenome</label>
+                <input type="text" class="form-control" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="label_name">E-mail</label>
+                <input type="text" class="form-control" name="email" id="email" placeholder="email" required>
+            </div>            
+
+            <div class="form-group">
+                <label for="label_name">Imagem</label>
+                <input type="file" class="form-control" name="imagem" id="imagem" placeholder="imagem" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Estado</label>
+                <input type="text" class="form-control" name="estado" id="estado" placeholder="Estado" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Cidade</label>
+                <input type="text" class="form-control" name="cidade" id="cidade" placeholder="Cidade" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Bairro</label>
+                <input type="text" class="form-control" name="bairro" id="bairro" placeholder="Bairro" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Rua</label>
+                <input type="text" class="form-control" name="rua" id="rua" placeholder="rua" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Numero</label>
+                <input type="number" class="form-control" name="numero" id="numero" placeholder="numero" required>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Complemento</label>
+                <input type="text" class="form-control" name="complemento" id="complemento" placeholder="Complemento" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria_descricao">Observações</label>
+                <textarea name="observacoes" class="form-control"  id="observacoes"> </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="label_name">Status</label>
+                <select class="form-control" name="status" id="status">
+                        <option value="1"> Ativo</option>
+                        <option value="0"> Inativo </option>
+                </select>
+            </div>
+
+
+            <a type="submit" class="btn btn-primary btn-sm" href="javascript:save('<?=$this->url(array('controller' => 'usuario', 'action' => "store"));?>')" >Salvar</a>
+            <a type="cancel" class="btn btn-danger btn-sm" href="javascript:conteudo('<?=$this->url(array('controller' => 'usuario', 'action' => "index"));?>')" >Cancel</a>
+        </form>
+
+    </div>
+</div>

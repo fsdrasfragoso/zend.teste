@@ -1,0 +1,72 @@
+<div class="ativo-admin-ffi">
+    <section class="login-area">
+        <h1 class="login-page-title"><?=$this->setTranslation('Acesso ao Ativo.com',$this->BaseUrl())?></h1>
+        <script language="javascript">
+            $(document).ready(function(){
+                $("#form-login-user").validate({
+                    rules:{
+                        nome: {
+                            required: true,
+                            email: true
+                        },
+                        senha: "required"
+                    },
+                    errorPlacement: function (error, element) {
+                    }
+                });
+            });
+            $(document).ready(function(){
+                $("#form-login-user-new").validate({
+                    rules:{
+                        email: {
+                            required: true,
+                            email: true
+                        }
+                    },
+                    errorPlacement: function (error, element) {
+                    }
+                });
+            });
+        </script>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-login-holder">
+                        <h2 class="login-form-title"><?=$this->setTranslation('Já tem cadastro? Faça o Login',$this->BaseUrl())?></h2>
+                        <form class="form-login-user" id="form-login-user" action="<?=$this->url(array('controller' => 'login', 'action' => 'valida')); ?>" method="post" id="form-login-user">
+                            <label class="form-login-user-label"><?=$this->setTranslation('Usuário',$this->BaseUrl())?></label>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-user"></i></span>
+                                <input type="text" name="nome" class="form-control" id="form-login-name-user" placeholder="<?=$this->setTranslation('Usuário',$this->BaseUrl())?>" aria-describedby="sizing-addon2">
+                            </div>
+                            <label class="form-login-user-label"><?=$this->setTranslation('Senha',$this->BaseUrl())?></label>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-lock"></i></span>
+                                <input type="password" name="senha" class="form-control" id="form-login-pass-user" placeholder="<?=$this->setTranslation('Senha',$this->BaseUrl())?>" aria-describedby="sizing-addon2">
+                            </div>
+                            <a href="<?php echo $this->esqueci_senha;?>" target="_blank" class="forgot-password-link"><?=$this->setTranslation('Esqueci minha senha',$this->BaseUrl())?></a>
+                            <button type="submit" class="btn btn-success submit-form"><?=$this->setTranslation('Entrar',$this->BaseUrl())?></button>
+                            <?php if($this->erro) echo $this->setTranslation('Usuário ou senha incorreta ou usuário não autorizado.',$this->BaseUrl()); ?>
+                        </form>
+                    </div>
+                </div>
+                <div class="form-separator-border">
+                    <span class="form-separator-label"><?=$this->setTranslation('OU',$this->BaseUrl())?></span>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-login-holder">
+                        <h2 class="login-form-title"><?=$this->setTranslation('Não tenho cadastro',$this->BaseUrl())?></h2>
+                        <form class="form-login-user" id="form-login-user-new" method="get" action="<?php echo $this->sem_cadastro;?>">
+                            <label class="form-login-user-label"><?=$this->setTranslation('E-mail',$this->BaseUrl())?></label>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-envelope"></i></span>
+                                <input type="text" name="email" class="form-control" id="form-login-email-user" placeholder="<?=$this->setTranslation('Digite seu e-mail',$this->BaseUrl())?>" aria-describedby="sizing-addon2">
+                            </div>
+                            <button type="submit" formtarget="_blank" class="btn btn-success submit-form"><?=$this->setTranslation('Cadastre-se',$this->BaseUrl())?></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

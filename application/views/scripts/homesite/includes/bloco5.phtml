@@ -1,0 +1,24 @@
+<?php
+
+$urlNoticia = $this->BaseUrl().'/upload/noticia/';
+
+?>
+                                            <div class="block100" id="mais_destaque">
+                                                <div class="edicao_barra">
+                                                    <?=$this->formSelect("id_situacao_cadastro11",$this->posicao[10]['id_situacao_cadastro'], array("class" => "situacao", "onchange"=>"situacao(11);"), array("1" => "Ativo", "2" => "Inativo"));?>
+                                                </div>
+                                                <ul class="col_not">
+                                            <?php
+                                                    foreach ($this->dadosb5 as $resultado): ?>
+
+                                                            <li class="left draggable1" data-position="<?=$resultado["nr_ordem"];?>" data-id="<?=$resultado["id_noticia"];?>">
+                                                                <a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>">
+                                                                    <img src="<?=$urlNoticia.$resultado['ds_url_imagem']?>" alt="" width="292" height="121" />
+                                                                </a>
+                                                                <h3><a class="editable" href="<?=$this->url(array('controller' => 'homesite', 'action' => 'novo', 'id' => $resultado["id_noticia"], 'posicao'=>$resultado["id_home_site_posicao"], 'ordem'=>$resultado["nr_ordem"])); ?>"><?=$resultado["ds_subtitulo"]?></a></h3>
+                                                            </li>
+                                                        <?php
+                                                    endforeach;
+                                            ?>
+                                                </ul>
+                                            </div>

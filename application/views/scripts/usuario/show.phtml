@@ -1,0 +1,126 @@
+
+<div class="card border">
+    <div class="card-body">
+        <h5 class="card-title">Buscar Usuario Pelo Codigo</h5>
+        <form name="formUsuario" id="formUsuario" method="POST" enctype="multipart/form-data" required>
+            
+            <div class="form-group">
+                <label for="label_name">Informe o Codigo</label>
+                <input type="text" class="form-control" name="cod" id="id" placeholder="Codigo" required>
+            </div>
+            <a type="submit" class="btn btn-primary btn-sm" href="javascript:buscar('<?=$this->url(array('controller' => 'usuario', 'action' => "show"));?>')" required>Buscar</a>
+    </div>
+</div>
+
+
+<br/>
+
+
+
+<div class="card border">
+    <div class="card-body">
+        <h5 class="card-title">Cadastro de Usuarios</h5>
+
+         <?php if(!empty($this->usuario)): ?>
+        <table class="table table-ordered table-hover" id="tabelaProdutos">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Foto</th>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Email</th>
+                    <th>Estado</th>
+                    <th>Cidade</th>                    
+                    <th>Bairro</th>
+                    <th>Rua</th>
+                    <th>Numero</th>
+                    <th>Complemento</th>
+                    <th>Status</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+               
+                    <tr>
+                        <td><?=$this->usuario['id']?></td>
+                        <td><img height="50px" src="<?=$this->usuario['imagem']?>"/></td>
+                        <td><?=$this->usuario['nome']?></td>
+                        <td><?=$this->usuario['sobrenome']?></td>
+                        <td><?=$this->usuario['email']?></td>
+                        <td><?=$this->usuario['estado']?></td>
+                        <td><?=$this->usuario['cidade']?></td>
+                        <td><?=$this->usuario['bairro']?></td>
+                        <td><?=$this->usuario['rua']?></td>
+                        <td><?=$this->usuario['numero']?></td>
+                        <td><?=$this->usuario['complemento']?></td>
+                        <td><?=$this->usuario['status']?></td>
+                        <td><?=$this->usuario['status']?></td>
+                        <td>
+                        <a href="javascript:edit('<?=$this->url(array('controller' => 'usuario', 'action' => "edit"));?>/id/<?=$this->usuario['id']?>')" class="btn btn-sm btn-primary">Editar</a>
+                        <a href="javascript:apagar('<?=$this->url(array('controller' => 'usuario', 'action' => "delete"));?>/id/<?=$this->usuario['id']?>')" class="btn btn-sm btn-danger">Apagar</a>
+                        </td>
+                    </tr>
+               
+            </tbody>
+        </table>
+       <?php endif;?>
+    </div>
+    <div class="card-footer">
+       <a class="btn btn-sm btn-primary" href="javascript:create('<?=$this->url(array('controller' => 'usuario', 'action' => "create"));?>')" role="button" >Novo Usuario</a>
+    </div>
+</div>
+<br/> 
+
+  
+    <h5 class="card-title">Log de Alterações no Cadastro do Usuario</h5>
+
+<section>
+    <ol class="collection collection-container">
+      <!-- The first list item is the header of the table -->
+      <li class="item item-container">       
+        <div class="attribute">cod</div>
+        <div class="attribute">Nome</div>
+        <div class="attribute">Sobrenome</div>
+        <div class="attribute">Email</div>
+        <div class="attribute">Estado</div>
+        <div class="attribute">Cidade</div>
+        <div class="attribute">Bairro</div>
+        <div class="attribute">Rua</div>
+        <div class="attribute">Numero</div>
+        <div class="attribute">Complemento</div>
+        <div class="attribute">Observação</div>
+        <div class="attribute">Status</div>
+        <div class="attribute">Ação</div>
+        <div class="attribute">Data do Log</div>
+      </li>
+      <!-- The rest of the items in the list are the actual data -->
+      
+      <?php foreach($this->log as $usuario):?>
+
+      <li class="item item-container">        
+      <div class="attribute" data-name="cod"><?=$usuario['id_usuario']?></div>
+      <div class="attribute" data-name="Nome"> <?=$usuario['nome']?></div>
+      <div class="attribute" data-name="Sobrenome"><?=$usuario['sobrenome']?></div>
+      <div class="attribute" data-name="E-mail"><?=$usuario['email']?></div>
+      <div class="attribute" data-name="Estado"><?=$usuario['estado']?></div>
+      <div class="attribute" data-name="cidade"><?=$usuario['cidade']?></div>
+      <div class="attribute" data-name="Bairro"><?=$usuario['bairro']?></div>
+      <div class="attribute" data-name="rua"><?=$usuario['rua']?></div>
+      <div class="attribute" data-name="numero"><?=$usuario['numero']?></div>
+      <div class="attribute" data-name="complemento"><?=$usuario['complemento']?></div>
+      <div class="attribute" data-name="Observação"><?=$usuario['observacoes']?></div>
+      <div class="attribute" data-name="status"><?=$usuario['status']?></div>
+      <div class="attribute" data-name="Ação"><?=$usuario['log_action']?></div>
+      <div class="attribute" data-name="Data do Log"><?=$usuario['dt_modificacao']?></div>
+      </li>
+      
+       <?php endforeach; ?>
+      
+    </ol>
+
+    
+  </section>
+
+
+  
