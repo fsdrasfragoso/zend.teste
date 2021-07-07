@@ -18,15 +18,6 @@ class IndexController extends Zend_Controller_Action
     {
 
     }
-    public function barcodeAction()
-    {
-        $params = $this->getRequest()->getParams();
-//        print_r($params);
-//        echo $params['codigo'];
-//        die();
-        $this->_helper->layout->disableLayout();
-        $this->view->codigo = $params['codigo'];
-    }
-
+    
 }
 
