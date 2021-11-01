@@ -7,12 +7,13 @@ $_SERVER["REQUEST_URI"] = str_replace('index.php','',$_SERVER["REQUEST_URI"]);
 
 $serverName = $_SERVER['SERVER_NAME'];
 
-$locale = 'pt_BR';
-$currency = 'BRL';
-$timezone = "America/Sao_Paulo";
-$id_pais = 33;
-$id_pais_origem = 1;
-$url_portal = "//zend.com";
+$locale = 'es_AR';
+$currency = 'ARS';
+$timezone = "America/Argentina/Buenos_Aires";
+$id_pais = 14;
+$id_pais_origem = 2;
+$url_portal = "//atletas-info.com";
+$sigla = "ar";
 
 $url_site = "http://{$serverName}";
 $url_admin = "http://zend.teste/";

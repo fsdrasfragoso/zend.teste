@@ -3,6 +3,7 @@
         "mercadopago/dx-php": "dev-master",
         "developersrede/erede-php": "^4.2",
         "aws/aws-sdk-php-resources": "^0.3.0",
-        "aws/aws-sdk-php": "^3.161"
+        "aws/aws-sdk-php": "^3.161",
+        "gettext/gettext": "^5.5"
     }
 }

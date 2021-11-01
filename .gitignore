@@ -48,3 +48,5 @@ nb-configuration.xml
 *.rar
 *.tar
 *.zip
+node_modules
+node_modules
